@@ -1,0 +1,54 @@
+.main {
+	background-color:$lightGray;
+}
+
+
+/*/ content /*/
+.content {
+	
+	position:relative;
+	display:flex;
+	flex-direction:column;
+	min-height: 100%;
+	padding-bottom:58px;
+	@include md {
+		padding-bottom:0;
+	}
+}
+.results {
+	
+	flex-grow:1;
+	padding:15px;
+	
+	display:grid;
+	grid-template-columns:repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-gap:15px;
+	
+	@include md {
+			grid-template-columns:repeat(4, 1fr);
+	}
+	@include xl {
+			grid-template-columns:repeat(5, 1fr);
+	}
+	
+
+} 
+
+.add-more-wrap {
+	
+	position:fixed;
+	bottom:0;
+	padding:10px;
+	width:100%;
+	text-align:center;
+	background-color:#e0e0e0;
+	
+	@include md {
+		position:sticky;
+		text-align:right;
+		padding:15px;
+		background-color:#e0e0e080;
+	}
+}
+

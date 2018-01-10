@@ -1,0 +1,62 @@
+/*/ Modals /
+--------------------------------------------------------- /*/
+
+.tingle-modal {
+    
+    &__close {
+        background:$spotyGreen;
+        right:15px;
+        transition:0.2s ease all;
+        
+        @include sm {
+            top:15px;
+            width: 70px;
+            height: 70px;
+            border-radius:3px;
+        }
+        
+        &:hover {
+            background:$mateGreen;
+        }
+    }
+    
+    &__closeIcon {
+        @include font-size(50px);
+        vertical-align: text-top;
+        font-weight: 700;
+        
+        @include sm {
+            display: block;
+        }
+            
+    }
+    &__closeLabel {
+        vertical-align: text-top;
+            
+    }
+    
+    &-box__content {
+        @include font-size(18px);
+    }
+    
+    // different types of modals
+    &.modal--error-search {
+        .tingle-modal-box {
+            @include sm {
+                width:auto;
+            }
+        }
+    }
+}
+
+
+// @media (max-width : $screen-sm-min) { 
+//   .tingle-modal {
+//     overflow: visible;
+//   }
+
+//   .tingle-modal-box__content {
+//     overflow-y: scroll;
+//     -webkit-overflow-scrolling: touch;
+//   }
+// }

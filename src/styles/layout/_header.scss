@@ -1,0 +1,125 @@
+/*/ Header styles /*/
+.header {
+	background-image:url("/dist/images/shattered-island.gif");
+	background-repeat:repeat;
+}
+
+.subheader {
+	background-color:white;
+	@include md {
+		background-image:url("/dist/images/shattered-island.gif");
+		background-repeat:repeat;
+	}
+}
+
+.header__logo {
+	text-align:center;
+	padding:10px;
+	
+	@include md {
+		background-color:$spotyBlack;
+		height:70px;
+		display: flex;
+        align-items: center;
+        justify-content: center;
+	}
+
+	.fa-headphones::before {
+		color:$spotyGreen;
+		@include font-size(34px)
+		@include md {
+			@include font-size(40px)
+		}
+	}
+}
+
+
+.header__nav {
+	display:flex;
+	
+	@include md {
+		flex-direction:column;
+	}
+	
+	li {
+		flex:1 0 0;
+		a {
+			display:block;
+			text-align:center;
+			padding:10px;
+			color:white;
+			background-color:$darkGray;
+			text-decoration:none;
+			transition: all .3s ease-in;
+			text-transform:uppercase;
+			font-size:16px;
+			font-weight:700;
+
+			@include md {
+				font-size:12px;
+				padding:10px 5px;
+				line-height:1.4;
+			}
+
+			&:hover {
+				background-color:$spotyGreen;
+			}
+			
+			&.active {
+				background-color:$spotyGreen;
+				@include md {
+					background-color:$gray;
+					border-left:4px solid $spotyGreen;
+				}
+			}
+			
+			
+		}
+	}
+}
+
+/*/ subheader styles /*/
+.subheader {
+	padding:15px;
+	display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+	@include md {
+		justify-content: flex-start;
+	}
+	
+	.c-input {
+		flex-grow: 1;
+    	flex-basis: 0;
+    	
+		@include md {
+			margin-right:10px;
+			order:0;
+			flex-basis:35%;
+			flex-grow: 0;
+		}
+		@include lg {
+			flex-basis:30%;
+		}
+	}
+	.c-combo-box {
+		margin-bottom:12px;
+		@include md {
+			margin-bottom:0;
+			order:1;
+			flex-basis:15%;
+		}
+		@include lg {
+			flex-basis:10%;
+			
+		}
+	}
+	.c-button {
+		margin-left:10px; 
+		@include md {
+			order:2;
+		}
+	}
+}
+

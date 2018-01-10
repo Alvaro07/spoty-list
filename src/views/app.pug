@@ -1,0 +1,47 @@
+extends layout
+
+block content  
+    div.page-wrap
+        
+        header.header
+            div.header__logo
+                i(class="fa fa-headphones" aria-hidden="true")
+                
+            nav
+                ul.header__nav
+                    li
+                        a( href="#" class="active") Create Mix
+                    li    
+                        a( href="#") Mix playlists
+                        
+        section.subheader
+            select.c-combo-box#searchType
+                option(data-id="artist") Artist
+                option(data-id="track") Track
+                option(data-id="top-tracks") Top 10 tracks
+            
+            div.c-input
+                input(type="text" required id="searchField")
+                span.bar
+                label Search Tracks
+                
+            a(class="c-button" href="#" id="searchButton")
+                i(class="fa fa-search" aria-hidden="true")
+            
+            div(id="errorSearch" )
+            
+        
+        main.main
+            section.content
+                
+                ul.results#searchResults
+                div.loader-content#ajax-loader
+                    div.spinner
+                    
+                
+                div.add-more-wrap.hide#addMoreWrap
+                    a(class="c-button" id="addMoreButton") Show more
+                    
+            
+            aside.aside                
+        

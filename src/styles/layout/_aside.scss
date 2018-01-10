@@ -1,0 +1,54 @@
+.aside {
+	@include lg {
+		background-color:$lightgreen;
+	}
+}
+
+/* Playlist /*/
+.playlist {
+	padding:15px;
+}
+
+.playlist__item {
+	display:grid;
+	grid-gap:10px;
+	grid-template-columns:50px 1fr 25px 25px;
+	padding-bottom:10px;
+	margin-bottom:10px;
+	border-bottom:1px solid #ccc;
+
+	&__image  {
+		img {
+			width:100%;
+		}
+	}
+	
+	&__title {
+		display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+		.name {
+			@include font-size(14px)
+			font-weight:700;
+			padding-bottom:5px;
+		}
+		
+		.album {
+			@include font-size(14px)
+		}
+	}
+
+	&__buttons {
+	    
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		
+		.fa {
+			@include font-size(18px)
+		}
+	}
+}
+
+

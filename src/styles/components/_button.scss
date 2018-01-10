@@ -1,0 +1,16 @@
+/*/ Button component styles /*/
+.c-button {
+    background:$spotyGreen;
+    color:white;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:3px;
+    @include font-size(16px)
+    transition:0.2s ease all;
+    cursor:pointer;
+    display:inline-block;
+    
+    &:hover {
+        background:$mateGreen;
+    }
+}  

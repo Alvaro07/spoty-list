@@ -1,0 +1,68 @@
+/*/ Styles for the layout /*/
+
+.page-wrap {
+	display:grid;
+	min-height: 100vh;
+	grid-template-columns:1fr;
+	grid-template-rows: 90px
+	    				120px
+						1fr;
+	@include md {
+		grid-template-columns: 75px 1fr;
+		grid-template-rows: 70px
+							1fr;
+	}
+}
+
+.header {
+	grid-row:1 / span 1;
+	@include md {
+		grid-column: 1 / span 1;
+		grid-row:1 / span 3;
+	}
+}
+
+.subheader {
+	grid-row:2 / span 1;
+	@include md {
+		grid-column: 2 / span 1;
+		grid-row:1 / span 1;
+	}
+}
+
+.main {
+	grid-row:3 / span 1;
+	overflow-y:scroll;
+	@include md {
+		grid-column: 2 / span 2;
+		grid-row:2 / span 1;
+	}
+	@include lg {
+		display:flex;
+	}
+}
+
+.content {
+	@include lg {
+		height:100%;
+		flex:1 0 65%;
+		height:calc(100vh - 70px); 
+		overflow-x:hidden;
+		overflow-y:auto;
+	}
+}
+
+.aside {
+	@include lg {
+		flex:1 0 35%;
+	}
+}
+
+footer {
+	background-color:$gray;
+	grid-row:4 / span 1;
+	@include md {
+		grid-column: 1 / span 2;
+		grid-row: 3 / span 1;
+	}
+}
