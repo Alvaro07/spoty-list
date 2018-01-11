@@ -328,3 +328,34 @@ app.get('/apiSearch/:data', function (req, res) {
     
     }
 });
+
+
+
+/**
+ * Funcion para crear la playlist en el usuario con los datos recibidos
+ * @function
+ */ 
+app.post('/playlist', function (req, res) {
+
+    var data = req.body;
+    var playlistName = data.name;
+    var tracksToAdd = data.tracksToAdd;
+
+    spotifyApi.setAccessToken(tokens[req.user.id]);
+    spotifyApi.createPlaylist(req.user.id, data.name, { 'public' : false })
+    
+    .then(function(data){
+      var playlistId = data.body.id;
+      spotifyApi.addTracksToPlaylist(req.user.id, playlistId, tracksToAdd);
+
+    })
+    .then(function(data) {
+      console.log('Created playlist!');
+
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+  
+  
+});
+

@@ -1,17 +1,25 @@
-
 // Globals variables
-
-    var itemsList,
-        searchWord,
-        numOffset = 0;
+var itemsList,
+    searchWord,
+    audioObject = null,
+    numOffset = 0,
+    tracksToPlaylist = [],
+    itemsToPlaylist = [],
+    playlistName = "new playlist",
+    playlistList = "",
+    itemsList = "";
 
 // DOM Elements
-    var searchButton = document.getElementById("searchButton"),
-        searchInput = document.getElementById("searchField"),
-        addMoreButton = document.getElementById('addMoreButton'),
-        addMoreWrap = document.getElementById('addMoreWrap'),
-        itemsSearchResults = document.getElementById("searchResults"),
-        searchTypeCombo = document.getElementById("searchType");
+var searchButton = document.getElementById("searchButton"),
+    searchInput = document.getElementById("searchField"),
+    addMoreButton = document.getElementById('addMoreButton'),
+    addMoreWrap = document.getElementById('addMoreWrap'),
+    itemsSearchResults = document.getElementById("searchResults"),
+    searchTypeCombo = document.getElementById("searchType"),
+    playlistItems = document.getElementById("playlistItems"),
+    createPlaylistButton = document.getElementById('playlistAdd'),
+    mainApp = document.getElementById('mainApp');
+    
 
 
 /**

@@ -11,6 +11,7 @@
 	flex-direction:column;
 	min-height: 100%;
 	padding-bottom:58px;
+	
 	@include md {
 		padding-bottom:0;
 	}
@@ -36,15 +37,13 @@
 } 
 
 .add-more-wrap {
-	
-	position:fixed;
-	bottom:0;
 	padding:10px;
 	width:100%;
 	text-align:center;
 	background-color:#e0e0e0;
 	
 	@include md {
+		bottom:0;
 		position:sticky;
 		text-align:right;
 		padding:15px;

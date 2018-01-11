@@ -72,6 +72,7 @@
 		}
 
 		.fa {
+			pointer-events:none;
 			@include font-size(20px)
 			@include lg {
 				@include font-size(32px)

@@ -55,6 +55,10 @@
 .aside {
 	@include lg {
 		flex:1 0 35%;
+		height:100%;
+		height:calc(100vh - 70px); 
+		overflow-x:hidden;
+		overflow-y:auto;
 	}
 }
 

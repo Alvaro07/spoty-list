@@ -7,12 +7,12 @@ block content
             div.header__logo
                 i(class="fa fa-headphones" aria-hidden="true")
                 
-            nav
-                ul.header__nav
-                    li
-                        a( href="#" class="active") Create Mix
-                    li    
-                        a( href="#") Mix playlists
+            // nav
+            //     ul.header__nav
+            //         li
+            //             a( href="#" class="active") Create Mix
+            //         li    
+            //             a( href="#") Mix playlists
                         
         section.subheader
             select.c-combo-box#searchType
@@ -31,7 +31,7 @@ block content
             div(id="errorSearch" )
             
         
-        main.main
+        main.main#mainApp
             section.content
                 
                 ul.results#searchResults
@@ -43,5 +43,18 @@ block content
                     a(class="c-button" id="addMoreButton") Show more
                     
             
-            aside.aside                
+            aside.aside        
+                
+                div.playlist-header
+                    h2.pl-title Create your playlist
+                    p.pl-description Add tracks to your new playlist and export it to your profile!! 
+              
+                    div.playlist-create
+                        div.c-input.playlistCreate__input-name
+                            input(type="text" required id="listName" disabled)
+                            span.bar
+                            label Playlist Name
+                        button(id="playlistAdd" class="c-button playlist-create__btn" title="Create playlist" disabled) CREATE 
+                
+                ul.playlist#playlistItems
         
