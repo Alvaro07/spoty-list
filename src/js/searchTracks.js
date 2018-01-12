@@ -212,22 +212,68 @@ addMoreButton.addEventListener("click", function(event){
         // añadimos playlist
         if ( target.classList.contains("anade-playlist")){
             
-            var fatherPath = target.parentNode.parentNode.parentNode;
+            
+            // Detectamos si ya esixte el tema en la playlist
+            var dataUrisArray = [];
+            for (var uris in itemsToPlaylist){
+              dataUrisArray.push(itemsToPlaylist[uris].URItrack);
+            };
+            
+            if ( dataUrisArray.indexOf(target.getAttribute("data-uri")) != -1) {
+                console.log("Ya estoy en la playlist");
+                    
+                    
+                    
+                 /**
+                 * Funciona para los temas repetidos, si se quieren introducir oi no
+                 * @function
+                 */
+                 
+                var repeatTrack = new tingle.modal({
+                    closeMethods: [],
+                    footer: true,
+                    stickyFooter: true
+                });
+                
+                
+                repeatTrack.addFooterBtn('Add Track', 'c-button tingle-btn', function(){
+                    addTrack();
+                    repeatTrack.close();
+                    
+                });
+                
+                repeatTrack.addFooterBtn('No', 'c-button tingle-btn', function(){
+                    repeatTrack.close();
+                }); 
+
+                repeatTrack.open();
+                repeatTrack.setContent("the song is already in the playlist, are you sure you want to add it?");
+                
+            } else {
+                addTrack();
+            }
+            
+            
+            function addTrack(){
+                var fatherPath = target.parentNode.parentNode.parentNode;
               
-            itemsToPlaylist.push({
-                name : fatherPath.querySelector(".title").innerHTML,
-                album: fatherPath.querySelector(".subtitle").innerHTML,
-                image: fatherPath.querySelector("img").getAttribute("src"),
-                previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
-                URItrack : target.getAttribute("data-uri"),
-                id : target.getAttribute("data-id")
-            });
+                itemsToPlaylist.push({ 
+                    name : fatherPath.querySelector(".title").innerHTML,
+                    album: fatherPath.querySelector(".subtitle").innerHTML,
+                    image: fatherPath.querySelector("img").getAttribute("src"),
+                    previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
+                    URItrack : target.getAttribute("data-uri"),
+                    id : target.getAttribute("data-id")
+                });
+                
+                addPlaylist(itemsToPlaylist);
+                tracksToPlaylist.push(target.getAttribute("data-uri"));
+                window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+            } 
             
-            addPlaylist(itemsToPlaylist);
+             
             
-            tracksToPlaylist.push(target.getAttribute("data-uri"));
-    
-            window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+            
             
             // Hablitimaos el input para el nombre del playlist, asi como el boton si el campo tiene caractéres
             listName.removeAttribute("disabled");
@@ -243,8 +289,8 @@ addMoreButton.addEventListener("click", function(event){
         
  }); 
  
+  
 
- 
 
  
  

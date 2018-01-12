@@ -6,6 +6,7 @@ function addPlaylist(data, modalState){
     // playlistInfo.innerHTML = ""
     playlistList = "";
     
+    
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
                             '<div class="playlist__item__image"><img src="' + value.image + '"></div>'+
@@ -79,46 +80,11 @@ function deleteItemPlaylist(id){
 
 
 /**
- * Escucha el evento click para construir el audio
- * Crea un objeto audio y lo reproduce con un click
+ * 
  * @function
  */
  playlistItems.addEventListener("click", function(e){
         var target = e.target;
-        
-        
-        // añadimos playlist
-        if ( target.classList.contains("anade-playlist")){
-            
-            var fatherPath = target.parentNode.parentNode.parentNode.parentNode;
-              
-            itemsToPlaylist.push({
-                name : fatherPath.querySelector(".title").innerHTML,
-                album: fatherPath.querySelector(".subtitle").innerHTML,
-                image: fatherPath.querySelector("img").getAttribute("src"),
-                previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
-                URItrack : target.getAttribute("data-uri"),
-                id : target.getAttribute("data-id")
-            });
-            
-            
-            addPlaylist(itemsToPlaylist);
-            
-            tracksToPlaylist.push(target.getAttribute("data-uri"));
-            console.log(tracksToPlaylist);
-    
-            // // window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
-            
-            // Hablitimaos el input para el nombre del playlist, asi como el boton si el campo tiene caractéres
-            listName.removeAttribute("disabled");
-            
-            if (listName.value != 0) {
-                createPlaylistButton.removeAttribute("disabled");
-            }
-            
-            
-            
-        };
         
         // borrarmos items de la playlist
         if (target.classList.contains("delete-button")) {
