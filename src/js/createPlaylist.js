@@ -40,7 +40,7 @@ var modalAddTrack = new tingle.modal({
     onOpen: function() {
         window.setTimeout(function() {
             modalAddTrack.close();
-        }, 200);
+        }, 500);
     }
 });
 

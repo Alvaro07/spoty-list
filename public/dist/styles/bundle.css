@@ -1333,6 +1333,8 @@ footer {
 
 .tingle-modal.modal--add-track {
   background: none;
+  padding-top: 0;
+  display: flex;
 }
 
 .tingle-modal.modal--add-track .tingle-modal-box {
@@ -1346,6 +1348,7 @@ footer {
   color: white;
   padding: 30px;
   text-align: center;
+  overflow-y: auto;
 }
 
 .tingle-modal.modal--add-track .tingle-modal__close {

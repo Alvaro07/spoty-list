@@ -51,6 +51,9 @@
     // modal for add track alerts
     &.modal--add-track {
         background:none;
+        padding-top:0;
+        display:flex;
+        
         
         .tingle-modal-box {
             width:auto;
@@ -62,23 +65,10 @@
             color:white;
             padding: 30px;
             text-align: center;
-            
-            
+            overflow-y: auto;
         }
         .tingle-modal__close {
             display:none;
         }
     }
 }
-
-
-// @media (max-width : $screen-sm-min) { 
-//   .tingle-modal {
-//     overflow: visible;
-//   }
-
-//   .tingle-modal-box__content {
-//     overflow-y: scroll;
-//     -webkit-overflow-scrolling: touch;
-//   }
-// }
