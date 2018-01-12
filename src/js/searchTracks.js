@@ -223,12 +223,9 @@ addMoreButton.addEventListener("click", function(event){
                 id : target.getAttribute("data-id")
             });
             
-            console.log(itemsToPlaylist)
-            
             addPlaylist(itemsToPlaylist);
             
             tracksToPlaylist.push(target.getAttribute("data-uri"));
-            console.log(tracksToPlaylist);
     
             window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
             

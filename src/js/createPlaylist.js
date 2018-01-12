@@ -2,7 +2,7 @@
  * Construye la playlist y la muestra
  * @function
  */
-function addPlaylist(data){
+function addPlaylist(data, modalState){
     // playlistInfo.innerHTML = ""
     playlistList = "";
     
@@ -18,8 +18,33 @@ function addPlaylist(data){
         
     });
     playlistItems.innerHTML = playlistList;
+    
+    if (modalState != false) {
+
+        
+        modalAddTrack.open();
+        modalAddTrack.setContent("The track is added");
+    }
+    
 
 }
+
+/**
+ * Funciona para abrir un modal al crear playlist
+ * @function
+ */
+ 
+var modalAddTrack = new tingle.modal({
+    closeMethods: ['overlay', 'button', 'escape'],
+    cssClass: ['modal--add-track'],
+    onOpen: function() {
+        window.setTimeout(function() {
+            modalAddTrack.close();
+        }, 200);
+    }
+});
+
+
 
 /**
  * Borra elemento de la playlist asi cmo su audio si esta reproduciendose
@@ -41,7 +66,7 @@ function deleteItemPlaylist(id){
     tracksToPlaylist.splice(posElement, 1);
     itemsToPlaylist.splice(posElement, 1);
     
-    addPlaylist(itemsToPlaylist);
+    addPlaylist(itemsToPlaylist, false);
     window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
     
     // seteamos si hay items en la playlist para deshabilitar el input
@@ -200,7 +225,7 @@ if (window.localStorage && window.localStorage.length != 0) {
     playListStorage = JSON.parse(window.localStorage.getItem('playListStorage'));
     
     itemsToPlaylist = playListStorage;
-    addPlaylist(itemsToPlaylist);
+    addPlaylist(itemsToPlaylist, false);
     
     itemsToPlaylist.forEach(function dataPlaylist(value, index){
         tracksToPlaylist.push(value.URItrack);

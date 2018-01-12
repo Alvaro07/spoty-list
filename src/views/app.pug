@@ -13,7 +13,14 @@ block content
             //             a( href="#" class="active") Create Mix
             //         li    
             //             a( href="#") Mix playlists
-                        
+        
+        input(id="tab1" type="radio" name="tabs" checked class="main-tabs__input main-tabs__input--search")
+        label(for="tab1" class="main-tabs__label") Search
+        
+        input(id="tab2" type="radio" name="tabs" class="main-tabs__input main-tabs__input--list")
+        label(for="tab2" class="main-tabs__label") Playlist
+            
+        
         section.subheader
             select.c-combo-box#searchType
                 option(data-id="artist") Artist
@@ -32,6 +39,7 @@ block content
             
         
         main.main#mainApp
+            
             section.content
                 
                 ul.results#searchResults
@@ -43,7 +51,7 @@ block content
                     a(class="c-button" id="addMoreButton") Show more
                     
             
-            aside.aside        
+            aside.aside       
                 
                 div.playlist-header
                     h2.pl-title Create your playlist

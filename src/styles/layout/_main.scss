@@ -1,21 +1,3 @@
-.main {
-	background-color:$lightGray;
-}
-
-
-/*/ content /*/
-.content {
-	
-	position:relative;
-	display:flex;
-	flex-direction:column;
-	min-height: 100%;
-	padding-bottom:58px;
-	
-	@include md {
-		padding-bottom:0;
-	}
-}
 .results {
 	
 	flex-grow:1;
@@ -37,17 +19,76 @@
 } 
 
 .add-more-wrap {
+	
 	padding:10px;
 	width:100%;
 	text-align:center;
-	background-color:#e0e0e0;
+	bottom:0;
+	position:sticky;
+	padding:15px;
+	background-color:#e0e0e080;
 	
 	@include md {
-		bottom:0;
-		position:sticky;
+		
 		text-align:right;
-		padding:15px;
-		background-color:#e0e0e080;
+		
 	}
 }
+
+
+
+// sistema de tabs
+.main-tabs__label {
+	display:inline-block;
+	text-align:center;
+	padding:10px;
+	color:white;
+	background-color:$darkGray;
+	text-decoration:none;
+	transition: all .3s ease-in;
+	font-size:16px;
+	font-weight:700;
+	cursor:pointer;
+	position:sticky;
+	top:0;
+	z-index:1;
+	
+	@include md {
+		display:none;
+	}
+
+	&:hover {
+		background-color:$spotyGreen;
+	}
+
+}
+
+.main-tabs__input:checked + label {
+	background-color:$spotyGreen;
+}
+
+.main-tabs__input {
+	display:none;
+}
+
+
+.main-tabs__input--search:checked ~ .subheader {
+  	display: flex;
+}
+
+.main-tabs__input--search:checked ~ .main .content { 
+  	display: block;
+  	@include md {
+		display: flex;
+	}
+}
+
+.main-tabs__input--list:checked ~ .main { 
+  grid-row:3 / span 2;
+}
+
+.main-tabs__input--list:checked ~ .main .aside{ 
+  display: block;
+}
+
 

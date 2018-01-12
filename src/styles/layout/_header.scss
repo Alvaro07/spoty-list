@@ -34,54 +34,54 @@
 }
 
 
-.header__nav {
-	display:flex;
+// .header__nav {
+// 	display:flex;
 	
-	@include md {
-		flex-direction:column;
-	}
+// 	@include md {
+// 		flex-direction:column;
+// 	}
 	
-	li {
-		flex:1 0 0;
-		a {
-			display:block;
-			text-align:center;
-			padding:10px;
-			color:white;
-			background-color:$darkGray;
-			text-decoration:none;
-			transition: all .3s ease-in;
-			text-transform:uppercase;
-			font-size:16px;
-			font-weight:700;
+// 	li {
+// 		flex:1 0 0;
+// 		a {
+// 			display:block;
+// 			text-align:center;
+// 			padding:10px;
+// 			color:white;
+// 			background-color:$darkGray;
+// 			text-decoration:none;
+// 			transition: all .3s ease-in;
+// 			text-transform:uppercase;
+// 			font-size:16px;
+// 			font-weight:700;
 
-			@include md {
-				font-size:12px;
-				padding:10px 5px;
-				line-height:1.4;
-			}
+// 			@include md {
+// 				font-size:12px;
+// 				padding:10px 5px;
+// 				line-height:1.4;
+// 			}
 
-			&:hover {
-				background-color:$spotyGreen;
-			}
+// 			&:hover {
+// 				background-color:$spotyGreen;
+// 			}
 			
-			&.active {
-				background-color:$spotyGreen;
-				@include md {
-					background-color:$gray;
-					border-left:4px solid $spotyGreen;
-				}
-			}
+// 			&.active {
+// 				background-color:$spotyGreen;
+// 				@include md {
+// 					background-color:$gray;
+// 					border-left:4px solid $spotyGreen;
+// 				}
+// 			}
 			
 			
-		}
-	}
-}
+// 		}
+// 	}
+// }
 
 /*/ subheader styles /*/
 .subheader {
 	padding:15px;
-	display: flex;
+	// display: flex;
     justify-content: center;
     flex-wrap: wrap;
     

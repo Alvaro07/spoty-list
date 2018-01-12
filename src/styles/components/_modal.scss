@@ -47,6 +47,28 @@
             }
         }
     }
+    
+    // modal for add track alerts
+    &.modal--add-track {
+        background:none;
+        
+        .tingle-modal-box {
+            width:auto;
+            background: transparent;
+        }
+        .tingle-modal-box__content {
+            background:$darkGray;
+            border-radius:10px;
+            color:white;
+            padding: 30px;
+            text-align: center;
+            
+            
+        }
+        .tingle-modal__close {
+            display:none;
+        }
+    }
 }
 
 

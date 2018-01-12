@@ -1,10 +1,12 @@
 /*/ Styles for the layout /*/
 
 .page-wrap {
+	background-color:$lightGray;
 	display:grid;
 	min-height: 100vh;
-	grid-template-columns:1fr;
-	grid-template-rows: 90px
+	grid-template-columns:1fr 1fr;
+	grid-template-rows: 55px
+						38px
 	    				120px
 						1fr;
 	@include md {
@@ -16,14 +18,28 @@
 
 .header {
 	grid-row:1 / span 1;
+	grid-column: 1 / span 2;
 	@include md {
 		grid-column: 1 / span 1;
 		grid-row:1 / span 3;
 	}
 }
 
-.subheader {
+.main-tabs__label--search {
 	grid-row:2 / span 1;
+	grid-column: 1 / span 1;
+}
+
+.main-tabs__input--list {
+	grid-row:2 / span 1;
+	grid-column: 2 / span 1;
+}
+
+
+.subheader {
+	display:none;
+	grid-row:3 / span 1;
+	grid-column: 1 / span 2;
 	@include md {
 		grid-column: 2 / span 1;
 		grid-row:1 / span 1;
@@ -31,11 +47,14 @@
 }
 
 .main {
-	grid-row:3 / span 1;
-	overflow-y:scroll;
+	
+	grid-row:4 / span 1;
+	grid-column: 1 / span 2;
+	
 	@include md {
 		grid-column: 2 / span 2;
 		grid-row:2 / span 1;
+		overflow-y:scroll;
 	}
 	@include lg {
 		display:flex;
@@ -43,16 +62,30 @@
 }
 
 .content {
+	display:none;
+	position:relative;
+	min-height: 100%;
+	
+	@include md {
+		padding-bottom:0;
+		display: flex;
+		flex-direction:column;
+	}
+	
 	@include lg {
 		height:100%;
 		flex:1 0 65%;
 		height:calc(100vh - 70px); 
 		overflow-x:hidden;
-		overflow-y:auto;
+		overflow-y:auto; 
 	}
 }
 
 .aside {
+	display:none;
+	@include md {
+		display:block;
+	}
 	@include lg {
 		flex:1 0 35%;
 		height:100%;
@@ -65,8 +98,12 @@
 footer {
 	background-color:$gray;
 	grid-row:4 / span 1;
+	grid-column: 1 / span 2;
+	
 	@include md {
 		grid-column: 1 / span 2;
 		grid-row: 3 / span 1;
 	}
 }
+
+

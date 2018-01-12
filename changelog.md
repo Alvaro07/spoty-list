@@ -1,3 +1,6 @@
+#### v0.1.2
+* First desplegable version
+
 #### v0.1.1
 * First version of spoty-list-mix, only with search tracks and create playlist
 
