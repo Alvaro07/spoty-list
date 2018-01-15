@@ -1478,6 +1478,9 @@ footer {
   color: #333;
   border-radius: 2px;
   border: 1px solid #ccc;
+  -webkit-appearance: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 .playlist__item {
