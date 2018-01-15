@@ -158,11 +158,12 @@ modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
     playListStorage = [];
     itemsToPlaylist = [];
     tracksToPlaylist = [];
+    window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
     
     playlistItems.innerHTML = ""
     
     itemsSearchResults.innerHTML = "";
-    addMoreButton.style.display = "none";
+    addMoreWrap.style.display = "none";
     
     listName.value = "";
     listName.setAttribute("disabled", false)
@@ -172,7 +173,7 @@ modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
         audioObject.pause();
     }
     
-    modalPlaylist.close();
+    modalPlaylist.close(); 
     
 });
 
@@ -201,7 +202,7 @@ if (window.localStorage && window.localStorage.length != 0) {
     if (itemsToPlaylist.length === 0){
         listName.setAttribute("disabled", false);
     } else {
-        listName.removeAttribute("disabled");
+        listName.removeAttribute("disabled");  
     }
     
 }; 
