@@ -979,6 +979,11 @@ footer {
   }
 }
 
+.subheader .c-button {
+  height: 40px;
+  overflow: hidden;
+}
+
 .header__logo {
   text-align: center;
   padding: 10px;

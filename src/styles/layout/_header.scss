@@ -10,6 +10,12 @@
 		background-image:url("/dist/images/shattered-island.gif");
 		background-repeat:repeat;
 	}
+	
+	.c-button {
+		//Fix for iphone
+    	height:40px;
+    	overflow:hidden;
+	}
 }
 
 .header__logo {
