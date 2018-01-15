@@ -1377,6 +1377,9 @@ footer {
   width: 100%;
   border-radius: 2px;
   border: 1px solid #ccc;
+  -webkit-appearance: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 .c-input input:focus {
