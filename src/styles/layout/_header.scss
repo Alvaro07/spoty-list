@@ -11,11 +11,12 @@
 		background-repeat:repeat;
 	}
 	
-	.c-button {
+	.c-button, .c-input input {
 		//Fix for iphone
     	height:40px;
     	overflow:hidden;
 	}
+	
 }
 
 .header__logo {

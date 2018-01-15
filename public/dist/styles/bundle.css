@@ -979,7 +979,8 @@ footer {
   }
 }
 
-.subheader .c-button {
+.subheader .c-button,
+.subheader .c-input input {
   height: 40px;
   overflow: hidden;
 }
