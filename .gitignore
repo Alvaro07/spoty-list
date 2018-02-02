@@ -1,2 +1,4 @@
 node_modules
 mejoras.txt
+public/dist/js
+public/dist/styles
