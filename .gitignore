@@ -1,4 +1,5 @@
 node_modules
 mejoras.txt
-public/dist/js
+public/dist/js/bundleMix.js
+public/dist/js/bundleCreate.js
 public/dist/styles
