@@ -17,7 +17,7 @@ function addPlaylist(data, modalState){
     // playlistInfo.innerHTML = ""
     playlistList = "";
     
-    
+    console.log(data);
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
                             '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
@@ -25,7 +25,9 @@ function addPlaylist(data, modalState){
                             '<div class="playlist__item__buttons">'+
                                '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
                             '<div class="playlist__item__buttons">'+
-                               '<button data-id="' + value.id + '" class="delete-button"><i class="fa fa-trash-o" aria-hidden="true"></i></button></div>'+
+                               '<button data-id="' + value.id + '" class="delete-button">'+
+                               '<i class="fa fa-trash-o" aria-hidden="true"></i>' +
+                               '</button></div>'+
                        '</div></li>';
         
     });
@@ -63,6 +65,7 @@ var smallModal = new tingle.modal({
  * @function
  */
 function deleteItemPlaylist(id){
+    
     
     var idList = [];
     itemsToPlaylist.forEach(function ListaIds(value, index){

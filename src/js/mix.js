@@ -156,22 +156,19 @@ comboMixTwo.addEventListener('change', function(){
 
 
 
-
-
-
-
-
 function arrayRandom(o) {
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 };
 
-console.log('funciono')
 // junta las dos playlists
 var playListFinal;
 mixPlaylistsButton.addEventListener('click', function(){
     
+    smallModal.open();
+    smallModal.setContent("The Playlist is mixed");
     
+        
     tracksToPlaylist = [];
     playListFinal = arrayRandom(arrayMixOne.concat(arrayMixTwo));
     
