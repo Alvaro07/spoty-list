@@ -33,10 +33,10 @@ function addPlaylist(data, modalState){
     playlistItems.innerHTML = playlistList;
     
     if (modalState != false) {
-
         
         smallModal.open();
         smallModal.setContent("The track is added");
+        
     }
     
 
@@ -65,6 +65,8 @@ var smallModal = new tingle.modal({
  */
 function deleteItemPlaylist(id){
     
+    console.log(itemsToPlaylist);
+    
     
     var idList = [];
     itemsToPlaylist.forEach(function ListaIds(value, index){
@@ -89,6 +91,7 @@ function deleteItemPlaylist(id){
         createPlaylistButton.setAttribute("disabled", false);
         listName.value = "";
     }
+    
     
 }
 

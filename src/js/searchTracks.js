@@ -79,7 +79,7 @@ function addItemsSearch(dataSearch){
                                     '<img src="' + value.imageAlbum + '">' +
                                     '<div class="actions">' +
                                         '<a title="play" class="track play-preview" data-preview="'+ value.previewUrl + '" data-id="' + value.id + '"><i class="fa fa-play"  aria-hidden="true"></i></a>' +
-                                        '<a title="add track" class="anade-playlist" data-uri="' + value.URITrack + '" data-id="' + value.id + ' aria-hidden="true"><i class="fa fa-plus" ></i></a>' +
+                                        '<a title="add track" class="anade-playlist" data-uri="' + value.URITrack + '" data-id="' + value.id + '" aria-hidden="true"><i class="fa fa-plus" ></i></a>' +
                                   '</div></div>' +
                                   '<div class="c-item-box__text">' +
                                     '<p class="title">' + value.name + '</p>' +
@@ -199,11 +199,9 @@ addMoreButton.addEventListener("click", function(event){
                     stickyFooter: true
                 });
                 
-                
                 repeatTrack.addFooterBtn('Add Track', 'c-button tingle-btn', function(){
                     addTrack();
                     repeatTrack.close();
-                    
                 });
                 
                 repeatTrack.addFooterBtn('No', 'c-button tingle-btn', function(){
@@ -229,9 +227,11 @@ addMoreButton.addEventListener("click", function(event){
                     URItrack : target.getAttribute("data-uri"),
                     id : target.getAttribute("data-id")
                 });
+                console.log(itemsToPlaylist);
                 
                 addPlaylist(itemsToPlaylist);
                 tracksToPlaylist.push(target.getAttribute("data-uri"));
+                
                 window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
             } 
             

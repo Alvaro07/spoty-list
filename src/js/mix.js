@@ -170,14 +170,13 @@ mixPlaylistsButton.addEventListener('click', function(){
     
         
     tracksToPlaylist = [];
-    playListFinal = arrayRandom(arrayMixOne.concat(arrayMixTwo));
+    itemsToPlaylist = arrayRandom(arrayMixOne.concat(arrayMixTwo));
     
-    playListFinal.forEach(function dataPlaylist(value, index){
+    itemsToPlaylist.forEach(function dataPlaylist(value, index){
         tracksToPlaylist.push(value.uri);
     });
     
-    addPlaylist(playListFinal, false);
-    
+    addPlaylist(itemsToPlaylist, false);
     window.localStorage.setItem('playListStorage', JSON.stringify(playListFinal));
     listName.removeAttribute("disabled");
             
