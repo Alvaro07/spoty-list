@@ -17,7 +17,6 @@ function addPlaylist(data, modalState){
     // playlistInfo.innerHTML = ""
     playlistList = "";
     
-    console.log(data);
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
                             '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
