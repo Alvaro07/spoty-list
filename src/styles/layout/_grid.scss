@@ -2,6 +2,8 @@
 
 .page-wrap {
 	background-color:$lightGray;
+	transition:0.2s ease all;
+	
 	display:grid;
 	min-height: 100vh;
 	grid-template-columns:1fr 1fr;
@@ -13,6 +15,26 @@
 		grid-template-columns: 75px 1fr;
 		grid-template-rows: 70px
 							1fr;
+	}
+	
+	&--without-subheader {
+		grid-template-rows: 55px
+						38px
+	    				0px
+						1fr;
+		@include md {
+			grid-template-rows: 70px
+								1fr;
+		}	
+	}
+	
+	&.off {
+		margin-left:230px;
+		margin-right:-230px;
+		@include md {
+			margin-left:0;
+			margin-right:0;
+		}
 	}
 }
 

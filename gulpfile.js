@@ -11,20 +11,26 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('public/dist/styles/'));
 });
 
-gulp.task('watch', function () { 
-  gulp.watch('src/styles/**/*.scss', ['sass']);
-  gulp.watch('src/js/**/*.js', ['concatJs']);
+
+gulp.task('concatJsCreate', function(){
+  gulp.src(['src/js/comun/*.js','src/js/searchTracks.js'])
+  .pipe(concat('bundleCreate.js'))
+  .pipe(uglify()) 
+  .pipe(gulp.dest('public/dist/js/'));
 });
 
-
-
-gulp.task('concatJs', function(){
-  gulp.src('src/js/**/*.js')
-  .pipe(concat('scripts.js'))
+gulp.task('concatJsMix', function(){
+  gulp.src(['src/js/comun/*.js','src/js/mix.js'])
+  .pipe(concat('bundleMix.js'))
   .pipe(uglify())
   .pipe(gulp.dest('public/dist/js/'));
 });
 
+
+gulp.task('watch', function () {
+  gulp.watch('src/styles/**/*.scss', ['sass']);
+  gulp.watch('src/js/**/*.js', ['concatJsCreate', 'concatJsMix']);
+});
 
 
 gulp.task('default', ['watch'], function() {

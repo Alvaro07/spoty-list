@@ -1,0 +1,79 @@
+extends layout
+
+block content  
+    div.page-wrap.page-wrap--without-subheader.mix-page#pageWrap
+        
+        header.header
+            div.canvas-mask#mask
+            a(id="toggleNav" class="toggle-nav" href="#")
+                i(class="fa fa-bars" aria-hidden="true")
+                
+                
+            div.header__logo
+                i(class="fa fa-headphones" aria-hidden="true")
+            
+            nav
+                a(id="closeNav" class="close-nav" href="#")
+                    i(class="fa fa-times" aria-hidden="true")
+                ul.header__nav#primaryNav
+                    li
+                        a( href="create" ) 
+                            i(class="fa fa-superpowers" aria-hidden="true")
+                            | Create 
+                            span Playlist 
+                    li    
+                        a( href="mix" class="active")
+                            i(class="fa fa-trello" aria-hidden="true")
+                            | Mix 
+                            span Playlists
+        
+        input(id="tab1" type="radio" name="tabs" checked class="main-tabs__input main-tabs__input--search")
+        label(for="tab1" class="main-tabs__label") Mix
+        
+        input(id="tab2" type="radio" name="tabs" class="main-tabs__input main-tabs__input--list")
+        label(for="tab2" class="main-tabs__label") Playlist
+            
+        
+        section.subheader
+        
+        main.main#mainApp
+            
+            section.content
+                
+                div.mix-area
+                    div.loader-content#ajax-loader
+                        div.spinner
+                    
+                    div.mix-area__header
+                        h5 Select two playlist to mix
+                    
+                    div.mix-area__content
+                        div.mix-area__combo
+                            select.c-combo-box#comboMixOne
+                            ul.mix-list#areaMixOne
+                            
+                        div.mix-area__combo
+                            select.c-combo-box#comboMixTwo 
+                            ul.mix-list#areaMixTwo
+                        
+                div.add-more-wrap
+                    button(id="mixPlaylistsButton" class="c-button disabled") Mix playlists  
+                    
+            
+            aside.aside        
+                
+                div.playlist-header
+                    h2.pl-title Export your mixed playlist
+                    p.pl-description Select two playlists, mix them and export it to your profile!! 
+              
+                    div.playlist-create
+                        div.c-input.playlistCreate__input-name
+                            input(type="text" required id="listName" disabled)
+                            span.bar
+                            label Playlist Name
+                        button(id="playlistAdd" class="c-button playlist-create__btn" title="Create playlist" disabled) CREATE 
+                
+                ul.playlist#playlistItems
+                
+    script(src="dist/js/tingle.min.js" type="text/javascript")  
+    script(src="dist/js/bundleMix.js" type="text/javascript")   

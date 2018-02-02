@@ -1,15 +1,26 @@
-/**
+// Globals variables
+var tracksToPlaylist = [],
+    itemsToPlaylist = [], 
+    playlistName = "new playlist",
+    playlistList = "",
+    itemsList = "";
+    
+// DOM Elements
+var playlistItems = document.getElementById("playlistItems"),
+    createPlaylistButton = document.getElementById('playlistAdd');
+    
+    /**
  * Construye la playlist y la muestra
  * @function
  */
-function addPlaylist(data, modalState){
+function addPlaylist(data, modalState){ 
     // playlistInfo.innerHTML = ""
     playlistList = "";
     
     
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
-                            '<div class="playlist__item__image"><img src="' + value.image + '"></div>'+
+                            '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
                             '<div class="playlist__item__title"><p class="name">' + value.name + '</p><p class="album">' + value.album +'</p></div>' +
                             '<div class="playlist__item__buttons">'+
                                '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
@@ -23,8 +34,8 @@ function addPlaylist(data, modalState){
     if (modalState != false) {
 
         
-        modalAddTrack.open();
-        modalAddTrack.setContent("The track is added");
+        smallModal.open();
+        smallModal.setContent("The track is added");
     }
     
 
@@ -35,13 +46,13 @@ function addPlaylist(data, modalState){
  * @function
  */
  
-var modalAddTrack = new tingle.modal({
+var smallModal = new tingle.modal({
     closeMethods: ['overlay', 'button', 'escape'],
     cssClass: ['modal--add-track'],
     onOpen: function() {
         window.setTimeout(function() {
-            modalAddTrack.close();
-        }, 500);
+            smallModal.close();
+        }, 1000);
     }
 });
 
@@ -73,7 +84,8 @@ function deleteItemPlaylist(id){
     // seteamos si hay items en la playlist para deshabilitar el input
     if (itemsToPlaylist.length === 0){
         listName.setAttribute("disabled", false);
-        createPlaylistButton.setAttribute("disabled", false)
+        createPlaylistButton.setAttribute("disabled", false);
+        listName.value = "";
     }
     
 }
@@ -126,18 +138,18 @@ createPlaylistButton.addEventListener("click", function(event){
  
 function createPlaylist(listInput){
     
-            playlistName = listInput.value;
+    playlistName = listInput.value;
+
+    var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("POST", "/playlist");
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.send(JSON.stringify({
+        name : playlistName, 
+        tracksToAdd: tracksToPlaylist
+    }));
     
-            var xmlHttp = new XMLHttpRequest();
-        	xmlHttp.open("POST", "/playlist");
-            xmlHttp.setRequestHeader("Content-Type", "application/json");
-            xmlHttp.send(JSON.stringify({
-                name : playlistName, 
-                tracksToAdd: tracksToPlaylist
-            }));
-            
-            modalPlaylist.setContent("<p>The list has been created in your profile</p>");
-            modalPlaylist.open();
+    modalPlaylist.setContent("<p>The list has been created in your profile</p>");
+    modalPlaylist.open();
 }  
  
 /**
@@ -152,21 +164,47 @@ var modalPlaylist = new tingle.modal({
 });
 
 
-modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
-    
+function resetPlaylist(){
+        
     // reseteo todo a 0
     playListStorage = [];
     itemsToPlaylist = [];
     tracksToPlaylist = [];
     window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
     
-    playlistItems.innerHTML = ""
     
-    itemsSearchResults.innerHTML = "";
-    addMoreWrap.style.display = "none";
+};
+
+modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
+
+    resetPlaylist();
+    playlistItems.innerHTML = "";
+    
+    
+    if (pageWrap.classList.contains('search-page')){
+        
+        itemsSearchResults.innerHTML = "";
+        addMoreButton.style.display = "none";
+        
+    } else if (pageWrap.classList.contains('mix-page')){
+        
+        arrayMixOne = [];
+        areaMixOne.innerHTML = '';
+        listaTemasArray = [];
+        comboMixOne.selectedIndex = "0";
+        
+        
+        arrayMixTwo = [];
+        areaMixTwo.innerHTML = '';
+        listaTemasArray = [];
+        comboMixTwo.selectedIndex = "0";
+        
+        watchEmptyMixlists();
+        
+    };
     
     listName.value = "";
-    listName.setAttribute("disabled", false)
+    listName.setAttribute("disabled", false);
     createPlaylistButton.setAttribute("disabled", false)
     
     if (audioObject) {

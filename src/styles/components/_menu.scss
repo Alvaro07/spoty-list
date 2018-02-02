@@ -1,0 +1,142 @@
+/* MENU */
+.toggle-nav {
+	position:absolute;
+	left:0;
+	top:0;
+	display:block;
+	color:white;
+	padding:12px;
+	
+	@include md {
+		display:none;
+	}
+	
+	
+	.fa {
+		@include font-size(32px);
+		text-shadow: 1px 0px #333;
+	}
+	
+}
+
+.close-nav {
+    position:absolute;
+    right:0;
+    top:0;
+    display:block;
+	color:white;
+	padding:10px 12px;
+	
+	@include md {
+       display:none;
+    }  
+    
+    .fa {
+		@include font-size(32px);
+		text-shadow: 1px 0px #333;
+	}
+}
+
+.canvas-mask {
+	position:fixed;
+	width:100vh;
+	height:100vh;
+	top:0;
+	left:0;
+	z-index:3;
+	background:rgba($darkGray, .5);
+	display:none;
+	
+	&.show {
+	    display:block;
+	    cursor:pointer;
+	    @include md {
+	       display:none;
+	    }     
+	}
+}
+
+
+nav {
+	position:absolute;
+	height:100vh;
+	width:230px;
+	background:$darkGray;
+	top:0;
+	margin-left:-230px;
+	transition:0.2s ease all;
+	z-index:4;
+	
+	@include md {
+		width:auto;
+		height:auto;
+		background:none;
+		top:initial;
+		position:relative;
+		margin-left:0;
+	}
+}
+
+.header__nav {
+    padding:55px 0px 15px;
+    
+    @include md {
+       padding:0;
+    }  
+	    
+    li {
+        border-bottom:1px solid $gray;
+        
+        &:first-child {
+            border-top:1px solid $gray;
+            @include md {
+				border-top:none;
+			} 
+        }
+        &:last-child {
+            @include md {
+				border:none;
+			} 
+        }
+        
+        a {
+            padding:15px;
+            display:block;
+            color:white;
+            @include font-size(14px);
+            font-weight:700;
+            transition:0.2s ease all;
+            
+            @include md {
+				text-align:center;
+			} 
+            
+            &:hover, &.active {
+                background:$gray;
+                @include md {
+					background:none;
+					color:$spotyGreen;
+				} 
+            }
+            
+            span {
+            	@include md {
+					display:none;
+				}  
+            }
+            
+            .fa {
+            	display:inline-block;
+            	padding-right:12px;
+            	@include font-size(18px);
+            	
+            	@include md {
+            		display:block; 
+            		padding-right:0;
+            		padding-bottom:10px;
+					@include font-size(24px);
+				} 
+            }
+        }
+    }
+}

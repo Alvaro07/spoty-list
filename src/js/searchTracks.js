@@ -1,4 +1,17 @@
-/**
+// Globals variables
+var itemsList,
+    searchWord,
+    numOffset = 0;
+    
+var searchButton = document.getElementById("searchButton"),
+    searchInput = document.getElementById("searchField"),
+    addMoreButton = document.getElementById('addMoreButton'),
+    addMoreWrap = document.getElementById('addMoreWrap'),
+    itemsSearchResults = document.getElementById("searchResults"),
+    searchTypeCombo = document.getElementById("searchType");
+    
+    
+    /**
  * varia el tipo de busqueda
  * @function
  */
@@ -153,61 +166,12 @@ addMoreButton.addEventListener("click", function(event){
 
 
 /**
- * Escucha el evento click para construir el audio
- * Crea un objeto audio y lo reproduce con un click
+ * 
+ * Añade item a la playlist
  * @function
  */
  mainApp.addEventListener("click", function(e){
         var target = e.target;
-        
-        
-        // si el click es en la portada del disco
-        if (target !== null && target.classList.contains('play-preview')) { 
-            
-            if ( target.classList.contains('playing') ){
-                 audioObject.pause();
-                 
-            } else {
-                
-                
-                
-                if (audioObject) {
-                    audioObject.pause();
-                }
-                
-                var preview = target.getAttribute("data-preview");
-                
-                
-                audioObject = new Audio(preview);
-                audioObject.play();
-                audioObject.setAttribute("data-id", target.getAttribute("data-id"));
-                
-                console.log()
-                
-                target.classList.add('playing');
-                target.querySelector(".fa").classList.add('fa-pause');
-                target.querySelector(".fa").classList.remove('fa-play');
-                target.setAttribute('title', 'pause track');
-                target.parentNode.classList.add('active');
-                
-                audioObject.addEventListener('ended', function () {
-                    target.classList.remove('playing');
-                    target.querySelector(".fa").classList.remove('fa-pause');
-                    target.querySelector(".fa").classList.add('fa-play');
-                    target.setAttribute('title', 'play track');
-                    target.parentNode.classList.remove('active');
-                });
-                
-                audioObject.addEventListener('pause', function () {
-                    target.classList.remove('playing');
-                    target.querySelector(".fa").classList.remove('fa-pause');
-                    target.querySelector(".fa").classList.add('fa-play');
-                    target.setAttribute('title', 'play track');
-                    target.parentNode.classList.remove('active');
-                });
-            }
-        };
-        
         
         // añadimos playlist
         if ( target.classList.contains("anade-playlist")){
@@ -260,7 +224,7 @@ addMoreButton.addEventListener("click", function(event){
                 itemsToPlaylist.push({ 
                     name : fatherPath.querySelector(".title").innerHTML,
                     album: fatherPath.querySelector(".subtitle").innerHTML,
-                    image: fatherPath.querySelector("img").getAttribute("src"),
+                    imageAlbum: fatherPath.querySelector("img").getAttribute("src"),
                     previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
                     URItrack : target.getAttribute("data-uri"),
                     id : target.getAttribute("data-id")
@@ -270,9 +234,6 @@ addMoreButton.addEventListener("click", function(event){
                 tracksToPlaylist.push(target.getAttribute("data-uri"));
                 window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
             } 
-            
-             
-            
             
             
             // Hablitimaos el input para el nombre del playlist, asi como el boton si el campo tiene caractéres

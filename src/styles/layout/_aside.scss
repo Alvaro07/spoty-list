@@ -1,5 +1,11 @@
 .aside {
 	background-color:$lightgreen;
+	
+	@include md {
+		display:flex;
+		flex-direction:column;
+	}
+	
 }
 
 /* Playlist /*/
@@ -17,6 +23,8 @@
     display:flex;
     margin-top:15px;
     
+    
+    
     &__btn {
     	margin-left:15px;
         &:disabled {
@@ -30,7 +38,15 @@
 
 .playlist {
 	padding:15px;
+	// background: #30333b;
+    border-radius: 3px;
+    
 	
+	@include md {
+		margin:15px 15px 30px 15px;
+		flex:1;
+		overflow-y:auto;
+	}
 	.playlist__item:last-child { 
 		margin-bottom:0;
 		padding-bottom:0;

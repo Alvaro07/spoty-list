@@ -112,8 +112,12 @@ app.get('/login', function(req, res){
   res.render('login', { user: req.user});
 });
 
-app.get('/app', function(req, res){
-  res.render('app.pug', { user: req.user.displayName, hasData : false, tracks : 17 });
+app.get('/create', function(req, res){
+  res.render('create.pug', { user: req.user.displayName, hasData : false, tracks : 17 });
+});
+
+app.get('/mix', function(req, res){
+  res.render('mix.pug', { user: req.user.displayName, hasData : false, tracks : 17 });
 });
 
 
@@ -145,7 +149,7 @@ app.get('/auth/spotify',
 app.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/app');
+    res.redirect('/create');
   });
 
 
@@ -267,6 +271,7 @@ app.get('/apiSearch/:data', function (req, res) {
             for (var track in items){
               
               itemTrack.push({
+                artist : items[track].artists[0].name,
                 name : items[track].name,
                 link : items[track].href,
                 album : items[track].album.name,
@@ -307,6 +312,7 @@ app.get('/apiSearch/:data', function (req, res) {
         for (var track in items){
           
           itemTrack.push({
+            artist : items[track].artists[0].name,
             name : items[track].name,
             link : items[track].href,
             album : items[track].album.name,
@@ -359,3 +365,139 @@ app.post('/playlist', function (req, res) {
   
 });
 
+
+
+
+
+/**
+ * Funcion para obtener las playlist del usuario
+ * @param {string} userId - el id del usuario,
+ * @param {function} cb - Callback para el uso de los datos devueltos.
+ * @function
+ */
+function getUserPlaylists(userId, cb) {
+ 
+  spotifyApi.clientCredentialsGrant()
+    .then(function(data) {
+      spotifyApi.setAccessToken(data.body['access_token']);
+      return  spotifyApi.getUserPlaylists(userId);
+      
+    }).then(function(data) {
+      cb(data.body);
+      spotifyApi.setRefreshToken(data.body['refresh_token']);
+  
+    }).catch(function(err) {
+      console.log('Unfortunately, something has gone wrong.', err.message);
+    }); 
+};
+
+
+
+/**
+ * Funcion para recibir los datos desde el front y realizar las busquedas a la API
+ * @function
+ */
+ 
+app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
+
+  var userProfile = req.user.id;
+  var userID = req.param('user');
+  var user;
+  
+  
+  if (userID === 'myUser'){
+    user = userProfile
+  } else {
+    user = userID
+  }
+  
+  getUserPlaylists(user, function(data){
+
+    var items= data.items;
+    var playlists = [];
+    
+    for (var playlistNumber in items){
+      playlists.push({
+        name: items[playlistNumber].name,
+        id: items[playlistNumber].id,
+        ownerId: items[playlistNumber].owner.id
+      });
+    };
+      
+      // console.log(playlists);
+      var dataReturn = {
+        items: playlists
+      };
+
+    res.json(JSON.stringify(dataReturn));
+ 
+    
+  });
+});
+
+
+
+
+/**
+ * Funcion para obtener las canciones de una playlist
+ * @param {string} playlistId - el id de la playlist,
+ * @param {function} cb - Callback para el uso de los datos devueltos.
+ * @function
+ */
+function getPlaylistsTracks(userId, playlistId, cb) {
+ 
+  spotifyApi.clientCredentialsGrant()
+    .then(function(data) {
+      spotifyApi.setAccessToken(data.body['access_token']);
+      return  spotifyApi.getPlaylist(userId, playlistId);
+      
+    }).then(function(data) {
+      cb(data.body);
+      spotifyApi.setRefreshToken(data.body['refresh_token']);
+  
+    }).catch(function(err) {
+      console.log('Unfortunately, something has gone wrong.', err.message);
+    }); 
+};
+
+
+
+app.get('/apiListsTracks/:datatracks', function (req, res) {
+
+  // var userProfile = req.user.id;
+  // console.log(req.param('user'));
+  var playlistId = req.param('id');
+  var ownerId = req.param('user');
+  
+  
+  getPlaylistsTracks(ownerId, playlistId, function(data){
+    
+    
+    var temas = data.tracks.items;
+    var tracks = [];
+    
+    for ( var trackNumber in temas) {
+      
+      tracks.push({
+        artist : temas[trackNumber].track.artists[0].name,
+        name : temas[trackNumber].track.name,
+        album : temas[trackNumber].track.album.name,
+        previewURL : temas[trackNumber].track.preview_url,
+        number : temas[trackNumber].track.track_number,
+        id : temas[trackNumber].track.id,
+        uri : temas[trackNumber].track.uri,
+        imageAlbum : temas[trackNumber].track.album.images[0].url
+      });  
+      
+
+    }
+    
+      var dataReturn = {
+        items: tracks
+      };
+      
+      res.json(JSON.stringify(dataReturn));
+      
+  });  
+  
+});

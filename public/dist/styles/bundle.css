@@ -757,6 +757,10 @@ html {
   height: 100%;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -777,10 +781,6 @@ button {
   border: none;
   cursor: pointer;
 }
-
-/**
- * Basic typography style for copy text
- */
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -837,6 +837,7 @@ p {
 
 .page-wrap {
   background-color: #F2F4F8;
+  transition: 0.2s ease all;
   display: grid;
   min-height: 100vh;
   grid-template-columns: 1fr 1fr;
@@ -847,6 +848,28 @@ p {
   .page-wrap {
     grid-template-columns: 75px 1fr;
     grid-template-rows: 70px 1fr;
+  }
+}
+
+.page-wrap--without-subheader {
+  grid-template-rows: 55px 38px 0px 1fr;
+}
+
+@media (min-width: 768px) {
+  .page-wrap--without-subheader {
+    grid-template-rows: 70px 1fr;
+  }
+}
+
+.page-wrap.off {
+  margin-left: 230px;
+  margin-right: -230px;
+}
+
+@media (min-width: 768px) {
+  .page-wrap.off {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -966,6 +989,7 @@ footer {
 .header {
   background-image: url("/dist/images/shattered-island.gif");
   background-repeat: repeat;
+  position: relative;
 }
 
 .subheader {
@@ -1001,7 +1025,7 @@ footer {
 }
 
 .header__logo .fa-headphones::before {
-  color: #1db954;
+  color: white;
   font-size: 2.125rem;
 }
 
@@ -1172,6 +1196,13 @@ footer {
   background-color: #E0EAEC;
 }
 
+@media (min-width: 768px) {
+  .aside {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 /* Playlist /*/
 
 .playlist-header {
@@ -1203,6 +1234,15 @@ footer {
 
 .playlist {
   padding: 15px;
+  border-radius: 3px;
+}
+
+@media (min-width: 768px) {
+  .playlist {
+    margin: 15px 15px 30px 15px;
+    flex: 1;
+    overflow-y: auto;
+  }
 }
 
 .playlist .playlist__item:last-child {
@@ -1212,6 +1252,171 @@ footer {
 
 footer {
   background-color: #5A6A7A;
+}
+
+/* MENU */
+
+.toggle-nav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  color: white;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .toggle-nav {
+    display: none;
+  }
+}
+
+.toggle-nav .fa {
+  font-size: 2rem;
+  text-shadow: 1px 0px #333;
+}
+
+.close-nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  color: white;
+  padding: 10px 12px;
+}
+
+@media (min-width: 768px) {
+  .close-nav {
+    display: none;
+  }
+}
+
+.close-nav .fa {
+  font-size: 2rem;
+  text-shadow: 1px 0px #333;
+}
+
+.canvas-mask {
+  position: fixed;
+  width: 100vh;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: rgba(24, 31, 36, 0.5);
+  display: none;
+}
+
+.canvas-mask.show {
+  display: block;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .canvas-mask.show {
+    display: none;
+  }
+}
+
+nav {
+  position: absolute;
+  height: 100vh;
+  width: 230px;
+  background: #181F24;
+  top: 0;
+  margin-left: -230px;
+  transition: 0.2s ease all;
+  z-index: 4;
+}
+
+@media (min-width: 768px) {
+  nav {
+    width: auto;
+    height: auto;
+    background: none;
+    top: initial;
+    position: relative;
+    margin-left: 0;
+  }
+}
+
+.header__nav {
+  padding: 55px 0px 15px;
+}
+
+@media (min-width: 768px) {
+  .header__nav {
+    padding: 0;
+  }
+}
+
+.header__nav li {
+  border-bottom: 1px solid #5A6A7A;
+}
+
+.header__nav li:first-child {
+  border-top: 1px solid #5A6A7A;
+}
+
+@media (min-width: 768px) {
+  .header__nav li:first-child {
+    border-top: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .header__nav li:last-child {
+    border: none;
+  }
+}
+
+.header__nav li a {
+  padding: 15px;
+  display: block;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: 0.2s ease all;
+}
+
+@media (min-width: 768px) {
+  .header__nav li a {
+    text-align: center;
+  }
+}
+
+.header__nav li a:hover,
+.header__nav li a.active {
+  background: #5A6A7A;
+}
+
+@media (min-width: 768px) {
+  .header__nav li a:hover,
+  .header__nav li a.active {
+    background: none;
+    color: #1db954;
+  }
+}
+
+@media (min-width: 768px) {
+  .header__nav li a span {
+    display: none;
+  }
+}
+
+.header__nav li a .fa {
+  display: inline-block;
+  padding-right: 12px;
+  font-size: 1.125rem;
+}
+
+@media (min-width: 768px) {
+  .header__nav li a .fa {
+    display: block;
+    padding-right: 0;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+  }
 }
 
 .loader-content {
@@ -1497,6 +1702,10 @@ footer {
   border-top: 1px solid #ccc;
 }
 
+.playlist__item:first-child {
+  border-top: none;
+}
+
 .playlist__item__image img {
   width: 100%;
 }
@@ -1511,11 +1720,12 @@ footer {
   font-size: 0.875rem;
   font-weight: 700;
   padding-bottom: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .playlist__item__title .album {
   font-size: 0.875rem;
+  margin-bottom: 0;
 }
 
 .playlist__item__buttons {
@@ -1655,6 +1865,93 @@ footer {
 
 .c-button:hover {
   background: #218e47;
+}
+
+.c-button--red {
+  background: #e74c3c;
+}
+
+.c-button--red:hover {
+  background: #c0392b;
+}
+
+.c-button.disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.page-wrap--without-subheader .subheader {
+  padding: 0;
+}
+
+.mix-area {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mix-area__header {
+  padding-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  .mix-area__content {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .mix-area__content .mix-area__combo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .mix-area__content .mix-area__combo:first-child {
+    padding-right: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mix-area__content .mix-area__combo .c-combo-box {
+    flex-shrink: 0;
+  }
+}
+
+.mix-list {
+  margin: 15px 0;
+}
+
+@media (min-width: 768px) {
+  .mix-list {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mix-list {
+    overflow-y: auto;
+  }
+}
+
+.mix-list .mix-list__item {
+  display: flex;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 5px;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.mix-list .mix-list__item .mix-list__title {
+  flex: 1;
+}
+
+.mix-list .mix-list__item .mix-list__buttons .fa {
+  pointer-events: none;
 }
 
 .login-wrapp {

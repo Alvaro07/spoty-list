@@ -27,6 +27,7 @@
 
 // 5. Components
 @import
+  'components/menu',
   'components/loader',
   'components/modal',
   'components/input',
@@ -37,4 +38,5 @@
 
 // 6. Page-specific styles 
 @import
-  'pages/login';  
+  'pages/mix',
+  'pages/login';   

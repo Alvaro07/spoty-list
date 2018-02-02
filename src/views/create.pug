@@ -1,18 +1,31 @@
 extends layout
 
 block content  
-    div.page-wrap
+    div.page-wrap.search-page#pageWrap
         
         header.header
+            div.canvas-mask#mask
+            a(id="toggleNav" class="toggle-nav" href="#")
+                i(class="fa fa-bars" aria-hidden="true")
+                
+                
             div.header__logo
                 i(class="fa fa-headphones" aria-hidden="true")
-                
-            // nav
-            //     ul.header__nav
-            //         li
-            //             a( href="#" class="active") Create Mix
-            //         li    
-            //             a( href="#") Mix playlists
+            
+            nav
+                a(id="closeNav" class="close-nav" href="#")
+                    i(class="fa fa-times" aria-hidden="true")
+                ul.header__nav#primaryNav
+                    li
+                        a( href="create" class="active") 
+                            i(class="fa fa-superpowers" aria-hidden="true")
+                            | Create 
+                            span Playlist 
+                    li    
+                        a( href="mix")
+                            i(class="fa fa-trello" aria-hidden="true")
+                            | Mix 
+                            span Playlists
         
         input(id="tab1" type="radio" name="tabs" checked class="main-tabs__input main-tabs__input--search")
         label(for="tab1" class="main-tabs__label") Search
@@ -34,9 +47,7 @@ block content
                 
             a(class="c-button" href="#" id="searchButton")
                 i(class="fa fa-search" aria-hidden="true")
-            
-            div(id="errorSearch" )
-            
+
         
         main.main#mainApp
             
@@ -66,3 +77,5 @@ block content
                 
                 ul.playlist#playlistItems
         
+    script(src="dist/js/tingle.min.js" type="text/javascript")  
+    script(src="dist/js/bundleCreate.js" type="text/javascript")   
