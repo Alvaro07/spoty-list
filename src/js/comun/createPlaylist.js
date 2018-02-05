@@ -10,28 +10,45 @@ var playlistItems = document.getElementById("playlistItems"),
     createPlaylistButton = document.getElementById('playlistAdd'),
     addMoreWrap = document.getElementById('addMoreWrap');
 
-    /**
+/**
  * Construye la playlist y la muestra
+ * @param {object} data - datos necesarios para añadir track a la playlist
+ * @param {boolean} modalState - parametro opcional que lo utlizamos para
+ * no sacar la modal cuando añadimos un tema, por ejemplo cuando añadimos al localstorage los tracks.
  * @function
  */
+
 function addPlaylist(data, modalState){ 
-    // playlistInfo.innerHTML = ""
+    
+    
+    /** seteamos la variables playlist a 0, para volver a crear la playlist 
+    * completa con todos los datos del objeto que le pasamos */
+    
     playlistList = "";
     
+    /** Construimos el hmtl del playlist */
+
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
-                            '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
-                            '<div class="playlist__item__title"><p class="name">' + value.name + '</p><p class="album">' + value.album +'</p></div>' +
-                            '<div class="playlist__item__buttons">'+
-                               '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
-                            '<div class="playlist__item__buttons">'+
-                               '<button data-id="' + value.id + '" class="delete-button">'+
-                               '<i class="fa fa-trash-o" aria-hidden="true"></i>' +
-                               '</button></div>'+
-                       '</div></li>';
+                          '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
+                          '<div class="playlist__item__title"><p class="name">' + value.name + '</p><p class="album">' + value.album +'</p></div>' +
+                          '<div class="playlist__item__buttons">'+
+                            '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
+                          '<div class="playlist__item__buttons">'+
+                            '<button data-id="' + value.id + '" class="delete-button">'+
+                            '<i class="fa fa-trash-o" aria-hidden="true"></i>' +
+                          '</button></div>'+
+                        '</div></li>';
         
     });
+    
+    /** Pintamos los elementos en el DOM */
+    
     playlistItems.innerHTML = playlistList;
+    
+    
+    /** Si no le pasamos el parametro modalState o se lo pasamos en true, 
+    * añadimos el modal para indicar al usuario que el track a sido añadido */
     
     if (modalState != false) {
         
@@ -43,21 +60,6 @@ function addPlaylist(data, modalState){
 
 }
 
-/**
- * Funciona para abrir un modal al crear playlist
- * @function
- */
- 
-var smallModal = new tingle.modal({
-    closeMethods: ['overlay', 'button', 'escape'],
-    cssClass: ['modal--add-track'],
-    onOpen: function() {
-        window.setTimeout(function() {
-            smallModal.close();
-        }, 1000);
-    }
-});
-
 
 
 /**
@@ -66,13 +68,15 @@ var smallModal = new tingle.modal({
  */
 function deleteItemPlaylist(id){
     
-    console.log(itemsToPlaylist);
     
+    /** Inicializamos la lista de ids que obtndremos para luego exportar la lista al usuario */
     
     var idList = [];
     itemsToPlaylist.forEach(function ListaIds(value, index){
         idList.push(value.id);
     });
+    
+    console.log(idList);
     
     // si se esta reproduciendo el audio de la canción a eliminar pausamos también el audio
     if ( audioObject &&  audioObject.getAttribute("data-id") === id) {
@@ -95,6 +99,21 @@ function deleteItemPlaylist(id){
     
     
 }
+
+/**
+ * Funciona para abrir un modal al crear playlist
+ * @function
+ */
+ 
+var smallModal = new tingle.modal({
+    closeMethods: ['overlay', 'button', 'escape'],
+    cssClass: ['modal--add-track'],
+    onOpen: function() {
+        window.setTimeout(function() {
+            smallModal.close();
+        }, 1000);
+    }
+});
 
 
 /**
@@ -157,6 +176,11 @@ function createPlaylist(listInput){
     modalPlaylist.setContent("<p>The list has been created in your profile</p>");
     modalPlaylist.open();
 }  
+
+
+
+
+
  
 /**
  * Funciona para abrir un modal al crear playlist

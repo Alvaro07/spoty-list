@@ -10,7 +10,7 @@ var searchButton = document.getElementById("searchButton"),
     searchTypeCombo = document.getElementById("searchType");
     
     
-    /**
+/**
  * varia el tipo de busqueda
  * @function
  */

@@ -42,27 +42,31 @@ function peticionAJAX(url, cb) {
  * Crea un objeto audio y lo reproduce con un click
  * @function
  */
+ 
  mainApp.addEventListener("click", function(e){
         var target = e.target;
         
-        // si el click es en la portada del disco
+        /** Comporbamos que el click es el elemento que contiene la clase play-preview */
         if (target !== null && target.classList.contains('play-preview')) { 
             
                 
             if (target.getAttribute('data-preview') === 'null'){
                 
+                /** Abre un modal cuando el track no dispone de preview de audio */
                 smallModal.open();
-                smallModal.setContent("No funciona el audio ostia");
+                smallModal.setContent("This track dont have audio preview");
                 
                 return
             } 
                 
+            /** Si el audio de dicho elemento ya esta reproduciendose lo paramos */
             if ( target.classList.contains('playing') ){
                  audioObject.pause();
-                 
+            
+            /** Si no, inciamos la reprodución del audio   */
             } else {
                  
-                 
+                /** paramos cualquier audio que este activo y creamos el nuevo   */
                 if (audioObject) {
                     audioObject.pause();
                 }
