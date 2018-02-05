@@ -136,8 +136,10 @@ function reloadMixArea(miCombo, mixArea){
 
 function watchEmptyMixlists(){
     if ( arrayMixOne.length != 0 && arrayMixTwo.length != 0){
+        addMoreWrap.classList.remove("hide");
         mixPlaylistsButton.classList.remove('disabled');
     } else {
+        addMoreWrap.classList.add("hide");
         mixPlaylistsButton.classList.add('disabled');
     }
 };

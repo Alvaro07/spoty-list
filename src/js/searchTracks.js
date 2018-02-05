@@ -6,7 +6,6 @@ var itemsList,
 var searchButton = document.getElementById("searchButton"),
     searchInput = document.getElementById("searchField"),
     addMoreButton = document.getElementById('addMoreButton'),
-    addMoreWrap = document.getElementById('addMoreWrap'),
     itemsSearchResults = document.getElementById("searchResults"),
     searchTypeCombo = document.getElementById("searchType");
     

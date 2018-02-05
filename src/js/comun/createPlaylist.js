@@ -7,8 +7,9 @@ var tracksToPlaylist = [],
     
 // DOM Elements
 var playlistItems = document.getElementById("playlistItems"),
-    createPlaylistButton = document.getElementById('playlistAdd');
-    
+    createPlaylistButton = document.getElementById('playlistAdd'),
+    addMoreWrap = document.getElementById('addMoreWrap');
+
     /**
  * Construye la playlist y la muestra
  * @function
