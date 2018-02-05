@@ -1,11 +1,8 @@
 // -----------------------------------------------------------------------------
-// CSS Helper classes
+// Sass functions
 // -----------------------------------------------------------------------------
 
-.txt-bold {
-	font-weight:700;
-}
-
-.hide {
-    display:none; 
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
 }

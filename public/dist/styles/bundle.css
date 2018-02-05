@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /**
  * Variables for media query mixin
 **/
@@ -7,10 +9,25 @@
 **/
 
 /**
- * Mixin for media queries
-**/
+ * Mixins para el uso de mediaqueries, para su uso seguir el siguiente ejemplo:
+ *
+ 
+   @include md {
+     styles.
+   }
+   
+ *
+ */
 
-/* Font size px to rems mixin */
+/**
+ * Mixin para el uso del font size, cambiando automaticamente los valores
+ * de pixeles a Rems, para su uso seguir el siguiente ejemplo:
+ *
+ 
+   @include font-size(14px)
+   
+ *
+ */
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 
@@ -743,6 +760,19 @@ template {
   padding: 0;
 }
 
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/**
+ * reseteo de estilos para elementos comunes
+ */
+
 ul {
   list-style: none;
 }
@@ -752,14 +782,15 @@ a {
   cursor: pointer;
 }
 
-html {
-  box-sizing: border-box;
-  height: 100%;
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-body {
-  overflow-x: hidden;
-}
+/**
+ * Modification native scrollbar for Chrome
+ */
 
 ::-webkit-scrollbar {
   width: 4px;
@@ -774,12 +805,6 @@ body {
   border-radius: 5px;
   background-color: #999;
   -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 body {
@@ -833,7 +858,11 @@ p {
   display: none;
 }
 
-/*/ Styles for the layout /*/
+/**
+ * Sistema de grid general de la aplicación, para ello usando grid layout,
+ * modificando el numero de columnas/filas dependiendo de la resolución del
+ * dispositivo
+ */
 
 .page-wrap {
   background-color: #F2F4F8;
@@ -983,8 +1012,6 @@ footer {
   }
 }
 
-/*/ Header styles /*/
-
 .header {
   background-image: url("/dist/images/shattered-island.gif");
   background-repeat: repeat;
@@ -1033,8 +1060,6 @@ footer {
     font-size: 2.5rem;
   }
 }
-
-/*/ subheader styles /*/
 
 .subheader {
   padding: 15px;
@@ -1096,43 +1121,14 @@ footer {
   }
 }
 
-.results {
-  flex-grow: 1;
-  padding: 15px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-gap: 15px;
-}
+/**
+ * Estilos que aplican a nivel general al contenedor principal de la aplicación
+ */
 
-@media (min-width: 768px) {
-  .results {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1280px) {
-  .results {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.add-more-wrap {
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  bottom: 0;
-  position: -webkit-sticky;
-  position: sticky;
-  padding: 15px;
-  background-color: #e0e0e080;
-}
-
-@media (min-width: 768px) {
-  .add-more-wrap {
-    text-align: right;
-  }
-}
+/**
+ * Sistema de tabs que funcionan en dispositivos pequeños, Para dispositivos
+ * grandes se eliminan mostrando siempre todo el contenido
+ */
 
 .main-tabs__label {
   display: inline-block;
@@ -1202,7 +1198,27 @@ footer {
   }
 }
 
-/* Playlist /*/
+/**
+ * Elemento común para la creación de playlist de la sección aside.
+ */
+
+.playlist {
+  padding: 15px;
+  border-radius: 3px;
+}
+
+@media (min-width: 768px) {
+  .playlist {
+    margin: 15px 15px 30px 15px;
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.playlist .playlist__item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 
 .playlist-header {
   padding: 15px;
@@ -1231,29 +1247,9 @@ footer {
   cursor: default;
 }
 
-.playlist {
-  padding: 15px;
-  border-radius: 3px;
-}
-
-@media (min-width: 768px) {
-  .playlist {
-    margin: 15px 15px 30px 15px;
-    flex: 1;
-    overflow-y: auto;
-  }
-}
-
-.playlist .playlist__item:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
 footer {
   background-color: #5A6A7A;
 }
-
-/* MENU */
 
 .toggle-nav {
   position: absolute;
@@ -1495,9 +1491,6 @@ nav {
   animation: anti-rotate-animation 0.85s linear 0s infinite;
 }
 
-/*/ Modals /
---------------------------------------------------------- /*/
-
 .tingle-modal__close {
   background: #1db954;
   right: 15px;
@@ -1566,8 +1559,6 @@ nav {
 .tingle-modal.modal--add-track .tingle-modal__close {
   display: none;
 }
-
-/*/ Input /*/
 
 .c-input {
   position: relative;
@@ -1692,6 +1683,10 @@ nav {
   -webkit-box-shadow: none;
 }
 
+/**
+ * Elemento para el listado de items de una playlist.
+ */
+
 .playlist__item {
   display: grid;
   grid-gap: 10px;
@@ -1737,6 +1732,11 @@ nav {
   font-size: 1.25rem;
   pointer-events: none;
 }
+
+/**
+ * Elemento cajas para el resultado de busqueda en la sección 
+ * de busqueda de temas. 
+ */
 
 .c-item-box {
   display: flex;
@@ -1848,8 +1848,6 @@ nav {
   margin: 0;
 }
 
-/*/ Button component styles /*/
-
 .c-button {
   background: #1db954;
   color: white;
@@ -1877,6 +1875,44 @@ nav {
 .c-button.disabled {
   opacity: .5;
   pointer-events: none;
+}
+
+.results {
+  flex-grow: 1;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-gap: 15px;
+}
+
+@media (min-width: 768px) {
+  .results {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .results {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.add-more-wrap {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  padding: 15px;
+  background-color: #e0e0e080;
+}
+
+@media (min-width: 768px) {
+  .add-more-wrap {
+    text-align: right;
+  }
 }
 
 .page-wrap--without-subheader .subheader {

@@ -1,4 +1,14 @@
-/*/ Styles for the layout /*/
+// -----------------------------------------------------------------------------
+// Grid system
+// -----------------------------------------------------------------------------
+
+
+/**
+ * Sistema de grid general de la aplicación, para ello usando grid layout,
+ * modificando el numero de columnas/filas dependiendo de la resolución del
+ * dispositivo
+ */
+
 
 .page-wrap {
 	background-color:$lightGray;

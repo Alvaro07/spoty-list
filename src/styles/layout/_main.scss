@@ -1,43 +1,17 @@
-.results {
-	
-	flex-grow:1;
-	padding:15px;
-	
-	display:grid;
-	grid-template-columns:repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-gap:15px;
-	
-	@include md {
-			grid-template-columns:repeat(4, 1fr);
-	}
-	@include xl {
-			grid-template-columns:repeat(5, 1fr);
-	}
-	
-} 
+// -----------------------------------------------------------------------------
+// Main section
+// -----------------------------------------------------------------------------
 
-.add-more-wrap {
-	
-	padding:10px;
-	width:100%;
-	text-align:center;
-	bottom:0;
-	position:-webkit-sticky;
-	position:sticky;
-	padding:15px;
-	background-color:#e0e0e080;
-	
-	@include md {
-		
-		text-align:right;
-		
-	}
-}
-
-
-
-// sistema de tabs
+/**
+ * Estilos que aplican a nivel general al contenedor principal de la aplicación
+ */
+ 
+ 
+ /**
+ * Sistema de tabs que funcionan en dispositivos pequeños, Para dispositivos
+ * grandes se eliminan mostrando siempre todo el contenido
+ */
+ 
 .main-tabs__label {
 	display:inline-block;
 	text-align:center;

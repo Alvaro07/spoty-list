@@ -1,5 +1,9 @@
-/*/ Header styles /*/
-.header {
+// -----------------------------------------------------------------------------
+// Header section
+// -----------------------------------------------------------------------------
+
+
+ .header {
 	background-image:url("/dist/images/shattered-island.gif");
 	background-repeat:repeat;
 	position:relative;
@@ -42,10 +46,8 @@
 }
 
 
-/*/ subheader styles /*/
 .subheader {
 	padding:15px;
-	// display: flex;
     justify-content: center;
     flex-wrap: wrap;
     

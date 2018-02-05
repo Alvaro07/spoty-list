@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// This file contains very basic styles.
+// Basic Styles
 // -----------------------------------------------------------------------------
 
 *,
@@ -8,15 +8,6 @@
   box-sizing: inherit;
   margin: 0;
 	padding: 0;
-}
-
-ul {
-	list-style:none;
-}
-
-a {
-	text-decoration:none;	
-	cursor:pointer;
 }
 
 html {
@@ -28,7 +19,31 @@ body {
 	overflow-x: hidden;
 }
 
-//Modification native scrollbar for Chrome
+
+/**
+ * reseteo de estilos para elementos comunes
+ */
+
+ul {
+	list-style:none;
+}
+
+a {
+	text-decoration:none;	
+	cursor:pointer;
+}
+
+button {
+	background:none;
+	border:none; 
+	cursor:pointer;
+}
+
+/**
+ * Modification native scrollbar for Chrome
+ */
+
+
 ::-webkit-scrollbar{
 	width: 4px;
 }
@@ -44,8 +59,4 @@ body {
 	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
 }
 
-button {
-	background:none;
-	border:none; 
-	cursor:pointer;
-}
+

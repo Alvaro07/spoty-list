@@ -1,3 +1,8 @@
+// -----------------------------------------------------------------------------
+// Aside section
+// -----------------------------------------------------------------------------
+
+
 .aside {
 	background-color:$lightgreen;
 	
@@ -8,37 +13,13 @@
 	
 }
 
-/* Playlist /*/
-.playlist-header { 
-	padding:15px;
-	
-	.pl-title {
-		@include font-size(24px);
-		font-weight:700;
-		margin-bottom:10px;
-	}
-}
-	
-.playlist-create {
-    display:flex;
-    margin-top:15px;
-    
-    
-    
-    &__btn {
-    	margin-left:15px;
-        &:disabled {
-            opacity:.5;
-            &:hover {
-                cursor:default
-            }
-        }
-    }
-}	
+
+/**
+ * Elemento común para la creación de playlist de la sección aside.
+ */
 
 .playlist {
 	padding:15px;
-	// background: #30333b;
     border-radius: 3px;
     
 	
@@ -52,6 +33,33 @@
 		padding-bottom:0;
 	} 
 }
+
+.playlist-header { 
+	padding:15px;
+	
+	.pl-title {
+		@include font-size(24px);
+		font-weight:700;
+		margin-bottom:10px;
+	}
+}
+
+.playlist-create {
+    display:flex;
+    margin-top:15px;
+    
+    &__btn {
+    	margin-left:15px;
+        &:disabled {
+            opacity:.5;
+            &:hover {
+                cursor:default
+            }
+        }
+    }
+}	
+
+	
 
 
 

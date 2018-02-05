@@ -1,0 +1,41 @@
+// -----------------------------------------------------------------------------
+// Search page styles
+// -----------------------------------------------------------------------------
+
+ 
+ .results {
+	
+	flex-grow:1;
+	padding:15px;
+	
+	display:grid;
+	grid-template-columns:repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-gap:15px;
+	
+	@include md {
+			grid-template-columns:repeat(4, 1fr);
+	}
+	@include xl {
+			grid-template-columns:repeat(5, 1fr);
+	}
+	
+} 
+
+.add-more-wrap {
+	
+	padding:10px;
+	width:100%;
+	text-align:center;
+	bottom:0;
+	position:-webkit-sticky;
+	position:sticky;
+	padding:15px;
+	background-color:#e0e0e080;
+	
+	@include md {
+		
+		text-align:right;
+		
+	}
+}

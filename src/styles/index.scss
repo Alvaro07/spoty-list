@@ -2,7 +2,7 @@
 
 // 1. Configuration and helpers
 @import
-  'utilities/fuctions',
+  'utilities/functions',
   'utilities/variables',
   'utilities/mixins';  
   
@@ -38,5 +38,6 @@
 
 // 6. Page-specific styles 
 @import
-  'pages/mix',
+  'pages/search-page',
+  'pages/mix-page',
   'pages/login';   

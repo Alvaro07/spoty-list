@@ -1,6 +1,18 @@
+// -----------------------------------------------------------------------------
+// Sass Mixins
+// -----------------------------------------------------------------------------
+
+
 /**
- * Mixin for media queries
-**/
+ * Mixins para el uso de mediaqueries, para su uso seguir el siguiente ejemplo:
+ *
+ 
+   @include md {
+     styles.
+   }
+   
+ *
+ */
 
 @mixin sm {
    @media (min-width: #{$screen-sm-min}) { @content }
@@ -16,7 +28,17 @@
 }
 
 
-/* Font size px to rems mixin */
+/**
+ * Mixin para el uso del font size, cambiando automaticamente los valores
+ * de pixeles a Rems, para su uso seguir el siguiente ejemplo:
+ *
+ 
+   @include font-size(14px)
+   
+ *
+ */
+ 
+ 
 @mixin font-size($size) {
   font-size: calculateRem($size);
 }
