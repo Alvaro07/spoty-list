@@ -50,6 +50,9 @@ function addItemsSearch(dataSearch){
 
             if ( dataItems.length === 0){
                 
+                /**  Creamos un modal especial que controle el input del buscador, 
+                que maneje su focus asi como el contenido del mismo */
+                
                 var modalTinyNoFooter = new tingle.modal({
                   onOpen: function() {
                       searchInput.blur()
@@ -65,13 +68,17 @@ function addItemsSearch(dataSearch){
                 
             } else {
                 
+                /**  Condicional para manejar si la busqueda viene a traves del buscador o 
+                del 'add more items' que añade mas items al resultado, si la busqueda es igual, 
+                añadimos items, sino borramos la busqueda antrerior para una busqueda de 0 */
                 
                 if ( dataSearch != searchWord ){
                     searchWord = dataSearch;
                     cleanSearch();
                 } 
         
-                // itemsList = "";
+                /**  Construimos el DOM con los resultados de la busqueda */
+                
                 dataItems.forEach(function ShowResults(value, index) {
                     itemsList += '<li class="c-item-box">' + 
                                  '<div class="c-item-box__img">' +
@@ -86,18 +93,25 @@ function addItemsSearch(dataSearch){
                                   '</div></li>';
                  });
                  
-                 itemsSearchResults.innerHTML = itemsList;
-
-                 // REFACORIZAR A UNA SOLO!!
-                 if (dataItems.length != 10){
-                     addMoreWrap.classList.remove("hide");
-                 }
+                /** Pintamos el objeto */
                  
-                 // REFACORIZAR A UNA SOLO!!
-                 if (dataItems.length < 8) {
+                itemsSearchResults.innerHTML = itemsList;
+                console.log(dataItems.length)
+                
+                
+                /**  Comprobamos cual es el resultado de la busqueda pra que cuando
+                queden menos de 8 resultados restantes deshabilitar el boton de 'add more items' */
+                
+                if (dataItems.length >= 8){
+                    addMoreWrap.classList.remove("hide");
+                
+                } else if (dataItems.length < 8) {
                    addMoreWrap.classList.add("hide");
-                 }
+                    
+                }
                  
+                 
+                
             }
         });
     
@@ -106,39 +120,44 @@ function addItemsSearch(dataSearch){
 
 
 /**
- * Añade eventos de la busqueda en spotify
+ * Función para realizar la busqueda en la api de spotify, comprobamos si el campo esta vacío,
+ * y si no es así realizamos la busqueda llamando a la función addItemsSearch()
  * @function
  */
- function searchSpoty(){ 
-     
-      if (searchInput.value != ""){
-           
-           cleanSearch();
-           addItemsSearch(searchInput.value.trim()); 
-              
-      } else {
+ 
+function searchSpoty(){ 
+    
+    /** Comprobamos si el campo del buscador esta vacio, sino es así limpiamos 
+    la busqueda anterior (si la hay) y añadimos items */
+    
+    if (searchInput.value != ""){
+       
+       cleanSearch();
+       addItemsSearch(searchInput.value.trim()); 
           
-          var modalTinyNoFooter = new tingle.modal({
-              cssClass: ['modal--error-search'],
-              onOpen: function() {
-                  searchInput.blur()
-                },
-              beforeClose: function(){
-                  this.destroy()
-              }
-          });
-          
-          modalTinyNoFooter.open();
-          modalTinyNoFooter.setContent("The search is empty");
-          
-        }
- }; 
+    } else {
+      
+      /** si el campo esta vacío creamos un modal con el que quitamos el focus del
+      input del buscador y mostramos un error */
+      
+      var modalTinyNoFooter = new tingle.modal({
+          cssClass: ['modal--error-search'],
+          onOpen: function() {
+              searchInput.blur()
+            },
+          beforeClose: function(){
+              this.destroy()
+          }
+      });
+      
+      modalTinyNoFooter.open();
+      modalTinyNoFooter.setContent("The search is empty");
+      
+    }
+}; 
  
  
-/**
- * Eventos para la busqueda de contenido
- * @function
- */
+/** Eventos para la busqueda de contenido */
  
 searchInput.addEventListener("keypress", function(event){
     if (event.which == 13 || event.keyCode == 13 ) {
@@ -151,103 +170,104 @@ searchButton.addEventListener("click", function(event){
 });
  
  
-/**
- * Evento para la busqueda de más items
- * @function
- */
 addMoreButton.addEventListener("click", function(event){
-    
     numOffset += 8;
     addItemsSearch(searchWord);
-    
 })  
 
 
+/** Eventos para los items de los resultados de la busqueda */
 
-/**
- * 
- * Añade item a la playlist
- * @function
- */
- mainApp.addEventListener("click", function(e){
-        var target = e.target;
+mainApp.addEventListener("click", function(e){
+    var target = e.target;
+    
+    /** Comprobamos que el elemento done hacemos click contiene la clase '.anade-playlist' */
+    
+    if ( target.classList.contains("anade-playlist")){
         
-        // añadimos playlist
-        if ( target.classList.contains("anade-playlist")){
-            
-            
-            // Detectamos si ya esixte el tema en la playlist
-            var dataUrisArray = [];
-            for (var uris in itemsToPlaylist){
-              dataUrisArray.push(itemsToPlaylist[uris].URItrack);
-            };
-            
-            if ( dataUrisArray.indexOf(target.getAttribute("data-uri")) != -1) {
-                console.log("Ya estoy en la playlist");
-                    
-                    
-                    
-                 /**
-                 * Funciona para los temas repetidos, si se quieren introducir oi no
-                 * @function
-                 */
-                 
-                var repeatTrack = new tingle.modal({
-                    closeMethods: [],
-                    footer: true,
-                    stickyFooter: true
-                });
-                
-                repeatTrack.addFooterBtn('Add Track', 'c-button tingle-btn', function(){
-                    addTrack();
-                    repeatTrack.close();
-                });
-                
-                repeatTrack.addFooterBtn('No', 'c-button tingle-btn', function(){
-                    repeatTrack.close();
-                }); 
-
-                repeatTrack.open();
-                repeatTrack.setContent("the song is already in the playlist, are you sure you want to add it?");
-                
-            } else {
-                addTrack();
-            }
-            
-            
-            function addTrack(){
-                var fatherPath = target.parentNode.parentNode.parentNode;
-              
-                itemsToPlaylist.push({ 
-                    name : fatherPath.querySelector(".title").innerHTML,
-                    album: fatherPath.querySelector(".subtitle").innerHTML,
-                    imageAlbum: fatherPath.querySelector("img").getAttribute("src"),
-                    previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
-                    URItrack : target.getAttribute("data-uri"),
-                    id : target.getAttribute("data-id")
-                });
-                console.log(itemsToPlaylist);
-                
-                addPlaylist(itemsToPlaylist);
-                tracksToPlaylist.push(target.getAttribute("data-uri"));
-                
-                window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
-            } 
-            
-            
-            // Hablitimaos el input para el nombre del playlist, asi como el boton si el campo tiene caractéres
-            listName.removeAttribute("disabled");
-            
-            if (listName.value != 0) {
-                createPlaylistButton.removeAttribute("disabled");
-            }
-            
-            
-            
+        
+        /**  Detectamos si ya esixte el tema en la playlist y creamos un array cpm todos los Uris de los tracks */
+        
+        var dataUrisArray = [];
+        for (var uris in itemsToPlaylist){
+          dataUrisArray.push(itemsToPlaylist[uris].URItrack);
         };
-
         
- }); 
+        
+        /**  Comprobamos si el track ya existe en el playlist */
+        
+        if ( dataUrisArray.indexOf(target.getAttribute("data-uri")) != -1) {
+            console.log("Ya estoy en la playlist");
+                
+             /** Si el tema esta ya en la playlist, se llama a un modal para 
+             decidir si se quiere repetir dicho track en la playlist,
+             y añadimos los botones a dicho modal*/
+            
+            var repeatTrack = new tingle.modal({
+                closeMethods: [],
+                footer: true,
+                stickyFooter: true
+            });
+            
+            repeatTrack.addFooterBtn('Add Track', 'c-button tingle-btn', function(){
+                addTrack();
+                repeatTrack.close();
+            });
+            
+            repeatTrack.addFooterBtn('No', 'c-button tingle-btn', function(){
+                repeatTrack.close();
+            }); 
+    
+            repeatTrack.open();
+            repeatTrack.setContent("the song is already in the playlist, are you sure you want to add it?");
+            
+        } else {
+            
+            addTrack(); /**  Si el tema no esta repetido lo añadimos */
+        }
+        
+        
+        /**
+         * Creamos una función privada para añadir el tema a la lista final.
+         * @function
+         */        
+        
+        function addTrack(){
+            var fatherPath = target.parentNode.parentNode.parentNode;
+            
+            /**  Añadimos los datos necesarios para luego exporetar la playlist */
+            itemsToPlaylist.push({ 
+                name : fatherPath.querySelector(".title").innerHTML,
+                album: fatherPath.querySelector(".subtitle").innerHTML,
+                imageAlbum: fatherPath.querySelector("img").getAttribute("src"),
+                previewURL : fatherPath.querySelector(".play-preview").getAttribute("data-preview"),
+                URItrack : target.getAttribute("data-uri"),
+                id : target.getAttribute("data-id")
+            });
+            
+            addPlaylist(itemsToPlaylist);
+            
+            /**  Añadimos la propiedad 'data-uri' a la variable tracksToPlaylist que
+            luego sera lo necesario para exportar a nuestro perfil la playlist */
+            
+            tracksToPlaylist.push(target.getAttribute("data-uri"));
+            
+            /**  Guardamos la variable con los datos en el localStorage */
+            
+            window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+        } 
+        
+        
+        /** Hablitimaos el input para el nombre de la creacióon del playlist, asi como el boton si el campo tiene caractéres */
+        listName.removeAttribute("disabled");
+        
+        /** comprobamos si tiene o no caracteres para habilitarlo */
+        if (listName.value != 0) {
+            createPlaylistButton.removeAttribute("disabled");
+        }
+        
+    };
+}); 
  
   
 

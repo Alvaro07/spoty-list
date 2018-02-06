@@ -100,4 +100,17 @@ function peticionAJAX(url, cb) {
                 });
             }
         };
- });        
+ });  
+
+
+/** Pequeño modal común utilizado para cuando añades temas/playlists y desaparece solo */
+
+var smallModal = new tingle.modal({
+    closeMethods: ['overlay', 'button', 'escape'],
+    cssClass: ['modal--add-track'],
+    onOpen: function() {
+        window.setTimeout(function() {
+            smallModal.close();
+        }, 1000);
+    }
+});

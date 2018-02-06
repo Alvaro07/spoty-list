@@ -5,13 +5,22 @@ var areaMixOne = document.getElementById('areaMixOne'),
     comboMixTwo = document.getElementById('comboMixTwo'),
     mixPlaylistsButton = document.getElementById('mixPlaylistsButton'),
     playlistItemsMix = document.getElementById('playlistItemsMix'),
-    arrayMixOne = [],
+    arrayMixOne = [],  
     arrayMixTwo = [],
     listaTemasArray = [];
 
-
+/**
+ * Construye la playlist y la muestra
+ * @param {object} data - datos necesarios para añadir track a la playlist
+ * @param {boolean} modalState - parametro opcional que lo utlizamos para
+ * no sacar la modal cuando añadimos un tema, por ejemplo cuando añadimos al localstorage los tracks.
+ * @function
+ */
+ 
 function printUserPlaylists(userSearch){ 
-            
+        
+        /** Si no le indicamos usuario usamos el perfil con el que nos hemos logado */
+        
         if ( userSearch === undefined) {
             userSearch = "myUser";    
         }
@@ -38,26 +47,38 @@ function printUserPlaylists(userSearch){
                 
             } else {
                 
+                /** Pintamos todas las opciones del combo, empezando por un 'select playlist' inicial */
+                
                 itemsList = "<option data-selector='index-option'>Select your playlist</option>";
+                
                 dataItems.forEach(function ShowResults(value, index){
-                itemsList += "<option id="+ value.id + " data-user="+ value.ownerId +">" + value.name + "</option>";
-
+                    itemsList += "<option id="+ value.id + " data-user="+ value.ownerId +">" + value.name + "</option>";
                 });
+                
+                /** Rellenamos los dos combos con las posibles listas del usuario a mezclar */
+                
                 document.getElementById('comboMixOne').innerHTML = itemsList;
                 document.getElementById('comboMixTwo').innerHTML = itemsList;
-                itemsList = '';
+                
+                /** Reseteamos itemsList  */
+                // itemsList = '';
             }
         });
     
 };
 
+/** Pintamos  las paylists al iniciar la pagina  */
+
 printUserPlaylists();    
 
 
-/**
+ /**
  * Consulta la api de spotify y devuelve un objeto con dicha busqueda
  * Si la busqueda la devuleve vacia muestra un error
  * Si ya hay items añade n más
+ * @param {object} mixZone - zona donde pintara el playlist 
+ * @param {string} id - identificador de dicha lista
+ * @param {string} ownerId - usuario propietario de lalista
  * @function
  */
 
@@ -66,6 +87,9 @@ function PrintPlaylist(mixZone, id, ownerId){
     
     var url = '/apiListsTracks/:datatracks?id=' + id + "&user=" + ownerId;
     var arrayTest;
+    
+    /** inicializamos la variable que contiene los tracks  */
+    
     listaTemasArray = []; 
     
     peticionAJAX(url, function(data){
@@ -82,15 +106,21 @@ function PrintPlaylist(mixZone, id, ownerId){
                                 '</li>';
                 listaTemasArray.push(value)
             });
+            
             mixZone.innerHTML = listItemsMix;
             listItemsMix = '';
             
+            /** Comporbamos que zona de mix estamos pintando para igualar el
+            array al array de temas antes construido  */
             
             if (mixZone === areaMixOne) {
                 arrayMixOne = listaTemasArray;
             } else if (mixZone === areaMixTwo) {
                 arrayMixTwo = listaTemasArray;
             }
+            
+            /** Comporbamos si estan las dos zonas de mix con contenido para 
+            mostrar el boton de mezclar  */
             
             watchEmptyMixlists()
             return listaTemasArray;
@@ -99,10 +129,19 @@ function PrintPlaylist(mixZone, id, ownerId){
 };
 
 
-// recarga el area del playlist
+ /**
+ * Recarga el area preparado para mostrar un lista de reproduccion para posteriormente mezclarla
+ * @param {object} miCombo - combo que usaremos para recargar su zona de lista 
+ * @param {string} mixArea - zona de mix
+ * @function
+ */
+ 
 function reloadMixArea(miCombo, mixArea){
     
-    
+    /** Comprobamos si el combo tiene un identificador paa mostrar la lista,
+    si no existe es que estamos sobre el index del combo, el 'select index',
+    si disponemos de identificador, pintamos dicha lista en su area */
+            
     if (miCombo.options[miCombo.selectedIndex].getAttribute('id') != null){
         PrintPlaylist(
             mixArea,
@@ -112,7 +151,10 @@ function reloadMixArea(miCombo, mixArea){
         
     } else {
         
-        
+        /** Si no hay identificador significa que estamos sobre el index del combo, 
+        entocnes reseteamos todas las variables dependiendo del combo en el que nos
+        encontremos */
+    
         if (miCombo === comboMixOne) {
             
             arrayMixOne = [];
@@ -133,7 +175,11 @@ function reloadMixArea(miCombo, mixArea){
 };
 
 
-
+ /**
+ * Comprueba si estan las dos areas de mix pintadas para activar el boton de mezlar
+ * @function
+ */
+ 
 function watchEmptyMixlists(){
     if ( arrayMixOne.length != 0 && arrayMixTwo.length != 0){
         addMoreWrap.classList.remove("hide");
@@ -157,31 +203,42 @@ comboMixTwo.addEventListener('change', function(){
 });
 
 
-
+/**
+ * Modifica el orden de cualquier objeto que le pasemos
+ * @function
+ */
+ 
 function arrayRandom(o) {
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 };
 
-// junta las dos playlists
+/** Modifica el orden de cualquier objeto que le pasemos */
+
 var playListFinal;
 mixPlaylistsButton.addEventListener('click', function(){
     
+    /** notificamos al usuario que hemos mezclado las playlist */
     smallModal.open();
     smallModal.setContent("The Playlist is mixed");
     
-        
+    /** inizializamos la playlist que usaremos para exportarla a nuestro perfil */    
     tracksToPlaylist = [];
+    
+    /** mezclamos las dos listas y le aplicamos el random */
+    
     itemsToPlaylist = arrayRandom(arrayMixOne.concat(arrayMixTwo));
+    
+    /** Generamos la lista de trakc que luego exportaremos a nuestro perfil */
     
     itemsToPlaylist.forEach(function dataPlaylist(value, index){
         tracksToPlaylist.push(value.uri);
     });
     
+    /** Añadimos la lista final al contendor de la playlist a exportar, y la guardamos en localstorage */    
     addPlaylist(itemsToPlaylist, false);
     window.localStorage.setItem('playListStorage', JSON.stringify(playListFinal));
     listName.removeAttribute("disabled");
-            
     
 });
 

@@ -946,19 +946,20 @@ p {
   .main {
     grid-column: 2 / span 2;
     grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 
 @media (min-width: 1024px) {
   .main {
-    display: flex;
+    flex-direction: row;
   }
 }
 
 .content {
   display: none;
   position: relative;
-  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -966,11 +967,13 @@ p {
     padding-bottom: 0;
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
 }
 
 @media (min-width: 1024px) {
   .content {
+    min-height: 100%;
     height: 100%;
     flex: 1 0 65%;
     height: calc(100vh - 70px);

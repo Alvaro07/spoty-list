@@ -22,11 +22,11 @@ function addPlaylist(data, modalState){
     
     
     /** seteamos la variables playlist a 0, para volver a crear la playlist 
-    * completa con todos los datos del objeto que le pasamos */
+    completa con todos los datos del objeto que le pasamos */
     
     playlistList = "";
     
-    /** Construimos el hmtl del playlist */
+    /** Construimos el html del playlist */
 
     data.forEach(function ShowResults(value, index) {
         playlistList += '<li class="playlist__item">' +
@@ -75,61 +75,49 @@ function deleteItemPlaylist(id){
     itemsToPlaylist.forEach(function ListaIds(value, index){
         idList.push(value.id);
     });
-    
-    console.log(idList);
-    
-    // si se esta reproduciendo el audio de la canción a eliminar pausamos también el audio
+
+
+    /** si se esta reproduciendo el audio de la canción a eliminar pausamos también el audio */
     if ( audioObject &&  audioObject.getAttribute("data-id") === id) {
         audioObject.pause();
     }
     
+    /** Comprobamos la posicion del elemento a borrar en el array para eliminarlo */
     var posElement = idList.indexOf(id);
     tracksToPlaylist.splice(posElement, 1);
     itemsToPlaylist.splice(posElement, 1);
     
+    /** Una vez eliminado volvemos a pintar la lista sin elemento que hemos borrado
+    así, como también volvemos a añadir los datos al localStorage*/
+    
     addPlaylist(itemsToPlaylist, false);
     window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
     
-    // seteamos si hay items en la playlist para deshabilitar el input
+    /** Al haber eliminado un item, comprobamos si aún quedan elementos en la playlist
+    para deshabilitar los elemenetos de la creación de la playtlist */
+    
     if (itemsToPlaylist.length === 0){
         listName.setAttribute("disabled", false);
         createPlaylistButton.setAttribute("disabled", false);
         listName.value = "";
     }
-    
-    
 }
 
-/**
- * Funciona para abrir un modal al crear playlist
- * @function
- */
- 
-var smallModal = new tingle.modal({
-    closeMethods: ['overlay', 'button', 'escape'],
-    cssClass: ['modal--add-track'],
-    onOpen: function() {
-        window.setTimeout(function() {
-            smallModal.close();
-        }, 1000);
+
+
+
+/** Capturmaos los eventos en la playlist para poder borrar los elementos */
+
+playlistItems.addEventListener("click", function(e){
+    var target = e.target;
+    
+    /** borrarmos items de la playlist */
+    if (target.classList.contains("delete-button")) {
+        deleteItemPlaylist(target.getAttribute("data-id"));
     }
-});
-
-
-/**
- * 
- * @function
- */
- playlistItems.addEventListener("click", function(e){
-        var target = e.target;
-        
-        // borrarmos items de la playlist
-        if (target.classList.contains("delete-button")) {
-            deleteItemPlaylist(target.getAttribute("data-id"));
-        }
-        
-        
- }); 
+    
+    
+}); 
 
 /**
  * Añado listeners para la llamada a la función
@@ -154,6 +142,22 @@ createPlaylistButton.addEventListener("click", function(event){
     createPlaylist(listName);
 });
  
+
+
+/**
+ * Funcion para resetear la playlist para empezar una nueva busqueda/mix
+ * inicializamos todas las variables, asi como el localstorage
+ * @function
+ */
+
+function resetPlaylist(){
+    
+    playListStorage = [];
+    itemsToPlaylist = [];
+    tracksToPlaylist = [];
+    window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+};
+
 
 /**
  * Añade evento al boton de creación de la playlist
@@ -181,29 +185,13 @@ function createPlaylist(listInput){
 
 
 
- 
-/**
- * Funciona para abrir un modal al crear playlist
- * @function
- */
- 
+/** Creamos el modal que se lanza al exportar una playlist */
+
 var modalPlaylist = new tingle.modal({
     closeMethods: [],
     footer: true,
     stickyFooter: true
 });
-
-
-function resetPlaylist(){
-        
-    // reseteo todo a 0
-    playListStorage = [];
-    itemsToPlaylist = [];
-    tracksToPlaylist = [];
-    window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
-    
-    
-};
 
 modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
 
@@ -211,6 +199,10 @@ modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
     playlistItems.innerHTML = "";
     
     
+    
+    /** dependiendo en la secciomn que estemos borramos el contenido del DOM
+    así como ocultamos el boton 'add morte items' */
+
     if (pageWrap.classList.contains('search-page')){
         
         itemsSearchResults.innerHTML = "";
@@ -218,11 +210,14 @@ modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
         
     } else if (pageWrap.classList.contains('mix-page')){
         
+        /** inicializamos las variables asi como el contenido en el DOM de las dos playlist,
+        también llevamos los combos a su opcion predeterminada y lanzamos la función watchEmptyPlaylist()
+        para ver si mantenemos o no el boton de mezclar la listas */
+        
         arrayMixOne = [];
         areaMixOne.innerHTML = '';
         listaTemasArray = [];
         comboMixOne.selectedIndex = "0";
-        
         
         arrayMixTwo = [];
         areaMixTwo.innerHTML = '';
@@ -233,6 +228,9 @@ modalPlaylist.addFooterBtn('NEW PLAYLIST', 'c-button tingle-btn', function(){
         
     };
     
+    /** inicializamos los campos para exportar la playlist asi como deshabilitar el boron de 'create playlist'
+    si hay audio reproduciendose también lo eliminamos */
+        
     listName.value = "";
     listName.setAttribute("disabled", false);
     createPlaylistButton.setAttribute("disabled", false)
@@ -254,6 +252,7 @@ modalPlaylist.addFooterBtn('CONTINUE', 'c-button tingle-btn', function(){
  * Comprueba si localstorage esta vacio, si no es así, recupera tu playlist y la pinta
  * @function
  */
+ 
 var playListStorage;
 if (window.localStorage && window.localStorage.length != 0) {
     
@@ -266,7 +265,8 @@ if (window.localStorage && window.localStorage.length != 0) {
         tracksToPlaylist.push(value.URItrack);
     });
     
-    // seteamos si hay items en la playlist para deshabilitar el input
+    /** seteamos si hay items en la playlist para deshabilitar el input /*/
+    
     if (itemsToPlaylist.length === 0){
         listName.setAttribute("disabled", false);
     } else {
