@@ -23,5 +23,5 @@ mask.addEventListener('click', function(event){
 
 /* Reseteamos todos los datos de la playlist cuando cambiemos de sección */
 document.getElementById('primaryNav').addEventListener('click', function(){
-    resetPlaylist();
+    resetPlaylist(); 
 })

@@ -71,6 +71,7 @@
         .mix-list__buttons {
             .fa {
                 pointer-events:none;
+                @include font-size(20px)
             }
         }
         

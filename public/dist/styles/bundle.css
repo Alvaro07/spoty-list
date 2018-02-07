@@ -1990,6 +1990,7 @@ nav {
 
 .mix-list .mix-list__item .mix-list__buttons .fa {
   pointer-events: none;
+  font-size: 1.25rem;
 }
 
 .login-wrapp {

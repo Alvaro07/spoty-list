@@ -88,7 +88,7 @@ function addItemsSearch(dataSearch){
                                         '<a title="add track" class="anade-playlist" data-uri="' + value.URITrack + '" data-id="' + value.id + '" aria-hidden="true"><i class="fa fa-plus" ></i></a>' +
                                   '</div></div>' +
                                   '<div class="c-item-box__text">' +
-                                    '<p class="title">' + value.name + '</p>' +
+                                    '<p class="title">' + value.artist + '</p>' +
                                     '<p class="subtitle">' + value.album + '</p>' +
                                   '</div></li>';
                  });
@@ -116,8 +116,6 @@ function addItemsSearch(dataSearch){
         });
     
 }
-
-
 
 /**
  * Función para realizar la busqueda en la api de spotify, comprobamos si el campo esta vacío,

@@ -33,7 +33,7 @@ function addPlaylist(data, modalState){
                           '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
                           '<div class="playlist__item__title"><p class="name">' + value.name + '</p><p class="album">' + value.album +'</p></div>' +
                           '<div class="playlist__item__buttons">'+
-                            '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
+                            '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play-circle-o" aria-hidden="true"></i></button></div>' +
                           '<div class="playlist__item__buttons">'+
                             '<button data-id="' + value.id + '" class="delete-button">'+
                             '<i class="fa fa-trash-o" aria-hidden="true"></i>' +
@@ -155,7 +155,10 @@ function resetPlaylist(){
     playListStorage = [];
     itemsToPlaylist = [];
     tracksToPlaylist = [];
-    window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+    // window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
+    window.localStorage.clear();
+    // console.log(window.localStorage)
+    
 };
 
 
@@ -248,16 +251,12 @@ modalPlaylist.addFooterBtn('CONTINUE', 'c-button tingle-btn', function(){
 });  
 
 
- /**
- * Comprueba si localstorage esta vacio, si no es así, recupera tu playlist y la pinta
- * @function
- */
- 
-var playListStorage;
-if (window.localStorage && window.localStorage.length != 0) {
+/** Comprueba si localstorage esta vacio, si no es así, recupera tu playlist y la pinta */
+
+var playListStorage = [];
+if ( window.localStorage = true && window.localStorage.length != 0) {
     
     playListStorage = JSON.parse(window.localStorage.getItem('playListStorage'));
-    
     itemsToPlaylist = playListStorage;
     addPlaylist(itemsToPlaylist, false);
     

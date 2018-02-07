@@ -102,7 +102,7 @@ function PrintPlaylist(mixZone, id, ownerId){
                 listItemsMix += '<li class="mix-list__item">' +
                                 '<div class="mix-list__title"><p><span class="txt-bold">' + value.artist + '</span> / ' + value.name +'</p></div>' +
                                 '<div class="mix-list__buttons">'+
-                                   '<button class="play-preview" title="play" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
+                                   '<button class="play-preview" title="play" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play-circle-o" aria-hidden="true"></i></button></div>' +
                                 '</li>';
                 listaTemasArray.push(value)
             });
@@ -215,7 +215,6 @@ function arrayRandom(o) {
 
 /** Modifica el orden de cualquier objeto que le pasemos */
 
-var playListFinal;
 mixPlaylistsButton.addEventListener('click', function(){
     
     /** notificamos al usuario que hemos mezclado las playlist */
@@ -235,9 +234,10 @@ mixPlaylistsButton.addEventListener('click', function(){
         tracksToPlaylist.push(value.uri);
     });
     
-    /** Añadimos la lista final al contendor de la playlist a exportar, y la guardamos en localstorage */    
+    /** Añadimos la lista final al contendor de la playlist a exportar, y la guardamos en localstorage */  
+    
     addPlaylist(itemsToPlaylist, false);
-    window.localStorage.setItem('playListStorage', JSON.stringify(playListFinal));
+    window.localStorage.setItem('playListStorage', JSON.stringify(itemsToPlaylist));
     listName.removeAttribute("disabled");
     
 });
