@@ -858,6 +858,10 @@ p {
   display: none;
 }
 
+.rst-margin {
+  margin: 0;
+}
+
 /**
  * Sistema de grid general de la aplicación, para ello usando grid layout,
  * modificando el numero de columnas/filas dependiendo de la resolución del
@@ -1215,6 +1219,7 @@ footer {
     margin: 15px 15px 30px 15px;
     flex: 1;
     overflow-y: auto;
+    padding-top: 0;
   }
 }
 
