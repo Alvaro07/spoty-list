@@ -4,13 +4,11 @@
 
 
 .aside {
-	background-color:$lightgreen;
-	
+	background-color: $lightgreen;
 	@include md {
-		display:flex;
-		flex-direction:column;
+		display: flex;
+		flex-direction: column;
 	}
-	
 }
 
 
@@ -19,42 +17,48 @@
  */
 
 .playlist {
-	padding:15px;
     border-radius: 3px;
-    
+    padding: 15px;
 	
 	@include md {
-		margin:15px 15px 30px 15px;
-		flex:1;
-		overflow-y:auto;
-		padding-top:0;
+		padding: 0 5px 0 0;
+		margin: 0px 10px 15px 15px;
+		flex: 1;
+		overflow-y: auto;
+		padding-top: 0;
 	}
-	.playlist__item:last-child { 
-		margin-bottom:0;
-		padding-bottom:0;
-	} 
+	
+	.playlist__item{
+		
+		&:first-child { 
+			margin-top: 0; 
+		} 
+		&:last-child { 
+			margin-bottom: 0;
+		} 
+	}
 }
 
 .playlist-header { 
-	padding:15px;
+	padding: 15px; 
 	
 	.pl-title {
 		@include font-size(24px);
-		font-weight:700;
-		margin-bottom:10px;
+		font-weight: 700;
+		margin-bottom: 10px;
 	}
 }
 
 .playlist-create {
-    display:flex;
-    margin-top:15px;
+    display: flex;
+    margin-top: 15px;
     
     &__btn {
-    	margin-left:15px;
+    	margin-left: 15px;
         &:disabled {
             opacity:.5;
             &:hover {
-                cursor:default
+                cursor: default
             }
         }
     }

@@ -28,6 +28,7 @@
 	text-align:center;
 	padding:10px;
 	
+	
 	@include md {
 		background-color:$spotyBlack;
 		height:70px;
@@ -35,14 +36,32 @@
         align-items: center;
         justify-content: center;
 	}
-
-	.fa-headphones::before {
-		color:white;
-		@include font-size(34px)
+	
+	.app-logo {
 		@include md {
+			display:none;
+		}
+	}
+	
+	.fa-headphones{
+		color:white;
+		display: none;
+		@include md {
+			display:block;
 			@include font-size(40px)
 		}
 	}
+}
+
+.app-logo {
+	font-family: 'Contrail One', cursive;
+	font-weight: normal;
+	@include font-size(30px);
+	line-height: 1.2;
+	color:white;
+	text-shadow: 1px 1px 15px rgba(0,0,0, .6);
+    letter-spacing: -.5px;
+	
 }
 
 
@@ -85,6 +104,18 @@
 		margin-left:10px; 
 		@include md {
 			order:2;
+		}
+	}
+	
+	.app-logo {
+		display:none;
+		@include md {
+		    order: 3;
+		    display: block;
+			margin: 0;
+			line-height: 1.4;
+			margin-left: auto;
+			padding-right:15px;
 		}
 	}
 }
