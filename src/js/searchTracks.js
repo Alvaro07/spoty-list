@@ -89,7 +89,7 @@ function addItemsSearch(dataSearch){
                                   '</div></div>' +
                                   '<div class="c-item-box__text">' +
                                     '<p class="title">' + value.artist + '</p>' +
-                                    '<p class="subtitle">' + value.album + '</p>' +
+                                    '<p class="subtitle">' + value.name + '</p>' +
                                   '</div></li>';
                  });
                  
