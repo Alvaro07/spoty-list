@@ -767,6 +767,7 @@ html {
 
 body {
   overflow-x: hidden;
+  height: 100%;
 }
 
 /**
@@ -2044,4 +2045,64 @@ nav {
 
 .login-wrapp {
   padding: 30px;
+  background-image: url("/dist/images/shattered-island.gif");
+  background-repeat: repeat;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-wrapp .app-logo {
+  font-size: 3.25rem;
+}
+
+@media (min-width: 541px) {
+  .login-wrapp .app-logo {
+    font-size: 3.625rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-wrapp .app-logo {
+    font-size: 4rem;
+  }
+}
+
+.login-wrapp__title {
+  font-size: 1.5rem;
+  text-align: center;
+  color: white;
+  font-family: 'Contrail One', cursive;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 541px) {
+  .login-wrapp__title {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-wrapp__title {
+    font-size: 2.125rem;
+  }
+}
+
+.login-box__description {
+  color: white;
+  max-width: 600px;
+  display: inline-block;
+  padding-bottom: 20px;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 541px) {
+  .login-box__description {
+    font-size: 1rem;
+  }
 }

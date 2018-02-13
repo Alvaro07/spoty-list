@@ -4,5 +4,55 @@
 
  
  .login-wrapp {
-    padding:30px; 
+   padding: 30px; 
+   background-image: url("/dist/images/shattered-island.gif");
+   background-repeat: repeat;
+   position: relative;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   
+   .app-logo {
+     @include font-size(52px)
+     @include sm {
+         @include font-size(58px);
+     }
+     @include md {
+         @include font-size(64px);
+     }
+   }
+}
+
+.login-wrapp__title {
+  @include font-size(24px);
+   text-align:center;
+   color:white;
+   font-family: 'Contrail One', cursive;
+   margin-bottom:10px;
+   
+   @include sm {
+       @include font-size(30px);
+   }
+   @include md {
+       @include font-size(34px);
+   }
+  
+}
+
+.login-box__description {
+  color:white;
+  max-width:600px;
+  display:inline-block;
+  padding-bottom:20px;
+  text-align:center;
+  line-height:1.2;
+  
+  @include font-size(14px);
+  
+  @include sm {
+      @include font-size(16px);
+  }
+  
 }
