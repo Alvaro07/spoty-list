@@ -20,28 +20,26 @@
          @include font-size(58px);
      }
      @include md {
-         @include font-size(64px);
+         @include font-size(72px);
      }
    }
 }
 
 .login-wrapp__title {
-  @include font-size(24px);
+  @include font-size(30px);
    text-align:center;
    color:white;
    font-family: 'Contrail One', cursive;
    margin-bottom:10px;
-   
-   @include sm {
-       @include font-size(30px);
-   }
+
+
    @include md {
        @include font-size(34px);
    }
   
 }
 
-.login-box__description {
+.login-wrapp__description {
   color:white;
   max-width:600px;
   display:inline-block;
@@ -49,10 +47,7 @@
   text-align:center;
   line-height:1.2;
   
-  @include font-size(14px);
-  
-  @include sm {
-      @include font-size(16px);
-  }
+  @include font-size(16px);
+
   
 }

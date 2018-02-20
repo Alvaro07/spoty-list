@@ -864,6 +864,14 @@ p {
 }
 
 /**
+ * Colors
+ */
+
+.clr-green {
+  color: #1db954;
+}
+
+/**
  * Sistema de grid general de la aplicación, para ello usando grid layout,
  * modificando el numero de columnas/filas dependiendo de la resolución del
  * dispositivo
@@ -1917,6 +1925,12 @@ nav {
   background: #218e47;
 }
 
+.c-button--xl {
+  font-size: 1.25rem;
+  padding: 15px 25px;
+  border-radius: 4px;
+}
+
 .c-button--red {
   background: #e74c3c;
 }
@@ -2067,22 +2081,16 @@ nav {
 
 @media (min-width: 768px) {
   .login-wrapp .app-logo {
-    font-size: 4rem;
+    font-size: 4.5rem;
   }
 }
 
 .login-wrapp__title {
-  font-size: 1.5rem;
+  font-size: 1.875rem;
   text-align: center;
   color: white;
   font-family: 'Contrail One', cursive;
   margin-bottom: 10px;
-}
-
-@media (min-width: 541px) {
-  .login-wrapp__title {
-    font-size: 1.875rem;
-  }
 }
 
 @media (min-width: 768px) {
@@ -2091,18 +2099,12 @@ nav {
   }
 }
 
-.login-box__description {
+.login-wrapp__description {
   color: white;
   max-width: 600px;
   display: inline-block;
   padding-bottom: 20px;
   text-align: center;
   line-height: 1.2;
-  font-size: 0.875rem;
-}
-
-@media (min-width: 541px) {
-  .login-box__description {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
 }

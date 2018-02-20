@@ -1,4 +1,7 @@
-#### v0.1.2
+#### v0.1.3
+* Version with mixer
+
+* #### v0.1.2
 * First desplegable version
 
 #### v0.1.1
