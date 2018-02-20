@@ -29,11 +29,11 @@ function addPlaylist(data, modalState){
     /** Construimos el html del playlist */
 
     data.forEach(function ShowResults(value, index) {
-        playlistList += '<li class="playlist__item">' +
+        playlistList += '<li class="playlist__item play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '">' +
                           '<div class="playlist__item__image"><img src="' + value.imageAlbum + '"></div>'+
                           '<div class="playlist__item__title"><p class="name">' + value.name + '</p><p class="album">' + value.album +'</p></div>' +
                           '<div class="playlist__item__buttons">'+
-                            '<button class="play-preview" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
+                            '<button><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
                           '<div class="playlist__item__buttons">'+
                             '<button data-id="' + value.id + '" class="delete-button">'+
                             '<i class="fa fa-trash-o" aria-hidden="true"></i>' +

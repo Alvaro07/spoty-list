@@ -99,10 +99,10 @@ function PrintPlaylist(mixZone, id, ownerId){
             
             var listItemsMix = '';
             dataItems.forEach(function ShowResults(value, index) {
-                listItemsMix += '<li class="mix-list__item">' +
+                listItemsMix += '<li class="mix-list__item play-preview" title="play" data-id="' + value.id + '" data-preview="' + value.previewURL + '">' +
                                 '<div class="mix-list__title"><p><span class="txt-bold">' + value.artist + '</span> / ' + value.name +'</p></div>' +
                                 '<div class="mix-list__buttons">'+
-                                   '<button class="play-preview" title="play" data-id="' + value.id + '" data-preview="' + value.previewURL + '"><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
+                                   '<button><i class="fa fa-play" aria-hidden="true"></i></button></div>' +
                                 '</li>';
                 listaTemasArray.push(value)
             });

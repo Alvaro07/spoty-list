@@ -22,7 +22,6 @@
     
     &__content {
         
-        
         @include md {
 			display:flex;
 		}
@@ -66,15 +65,39 @@
         margin-bottom:5px;
         align-items:center;
         border-radius:3px;
+        transition:0.2s ease all;
+        cursor:pointer;
+        
+        &:hover, &.playing {
+            
+            background-color: $yellow;
+            
+            .mix-list__buttons .fa {
+                opacity: 1;
+            }
+        }
         
         .mix-list__title {
             flex:1;
+            pointer-events: none;
+            padding-right:10px;
         } 
         
         .mix-list__buttons {
             .fa {
+                
+                transition:0.2s ease all;
+                opacity: 1;
                 pointer-events:none;
-                @include font-size(14px)
+                @include font-size(14px);
+                
+                @include lg {
+                    opacity: 0;
+                }
+                
+                &.fa-pause {
+                    opacity:1;
+                }
             }
         }
         

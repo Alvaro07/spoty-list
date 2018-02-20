@@ -1748,6 +1748,18 @@ nav {
   margin: 5px 0;
   background: #f7fafb;
   border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s ease all;
+}
+
+.playlist__item:hover,
+.playlist__item.playing {
+  background-color: #ffe6be;
+}
+
+.playlist__item:hover .playlist__item__buttons .fa-play,
+.playlist__item.playing .playlist__item__buttons .fa-play {
+  opacity: 1;
 }
 
 .playlist__item__image img {
@@ -1759,6 +1771,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  pointer-events: none;
 }
 
 .playlist__item__title .name {
@@ -1790,8 +1803,23 @@ nav {
 }
 
 .playlist__item__buttons .fa {
+  transition: 0.2s ease all;
   font-size: 1rem;
   pointer-events: none;
+}
+
+.playlist__item__buttons .fa.fa-play {
+  opacity: 1;
+}
+
+@media (min-width: 1024px) {
+  .playlist__item__buttons .fa.fa-play {
+    opacity: 0;
+  }
+}
+
+.playlist__item__buttons .fa.fa-pause {
+  opacity: 1;
 }
 
 /**
@@ -2052,15 +2080,41 @@ nav {
   margin-bottom: 5px;
   align-items: center;
   border-radius: 3px;
+  transition: 0.2s ease all;
+  cursor: pointer;
+}
+
+.mix-list .mix-list__item:hover,
+.mix-list .mix-list__item.playing {
+  background-color: #ffe6be;
+}
+
+.mix-list .mix-list__item:hover .mix-list__buttons .fa,
+.mix-list .mix-list__item.playing .mix-list__buttons .fa {
+  opacity: 1;
 }
 
 .mix-list .mix-list__item .mix-list__title {
   flex: 1;
+  pointer-events: none;
+  padding-right: 10px;
 }
 
 .mix-list .mix-list__item .mix-list__buttons .fa {
+  transition: 0.2s ease all;
+  opacity: 1;
   pointer-events: none;
   font-size: 0.875rem;
+}
+
+@media (min-width: 1024px) {
+  .mix-list .mix-list__item .mix-list__buttons .fa {
+    opacity: 0;
+  }
+}
+
+.mix-list .mix-list__item .mix-list__buttons .fa.fa-pause {
+  opacity: 1;
 }
 
 .login-wrapp {
