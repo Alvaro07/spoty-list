@@ -5,6 +5,9 @@
 
 .page-wrap--without-subheader .subheader {
     padding:0;
+    @include md {
+		padding:15px;
+	}
 }
 
 .mix-area {

@@ -1986,6 +1986,12 @@ nav {
   padding: 0;
 }
 
+@media (min-width: 768px) {
+  .page-wrap--without-subheader .subheader {
+    padding: 15px;
+  }
+}
+
 .mix-area {
   flex: 1;
   padding: 15px;
