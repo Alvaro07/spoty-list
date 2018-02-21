@@ -42,7 +42,7 @@ function printUserPlaylists(mixZone, userSearch){
                 
                 var modalTinyNoFooter = new tingle.modal({});
                 modalTinyNoFooter.open();
-                modalTinyNoFooter.setContent("This user dont have playlists");
+                modalTinyNoFooter.setContent("This user dont have playlists or not exist");
 
                 
             } else {
@@ -289,19 +289,20 @@ modalUser.addFooterBtn('Close', 'c-button tingle-btn', function(){
     
   
 /** Creamos el Evento para levantar el modal de cambio de usuario */
+
 var changeUserButtonOne = document.getElementById('changeUserButtonOne'),
     changeUserButtonTwo = document.getElementById('changeUserButtonTwo'),
     modalUserContent = document.querySelector('.tingle-user-content').innerHTML,
     changeUserButton = document.querySelector('.btn-change-user'),
     userNameValue;
     
-    
 changeUserButtonOne.addEventListener('click', function(){
     changeUser(this.getAttribute('data-area'));
-})
+});
+
 changeUserButtonTwo.addEventListener('click', function(){
     changeUser(this.getAttribute('data-area'));
-})
+});
 
 
 var areaMixChange;

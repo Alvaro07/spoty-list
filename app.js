@@ -387,6 +387,7 @@ function getUserPlaylists(userId, cb) {
       spotifyApi.setRefreshToken(data.body['refresh_token']);
   
     }).catch(function(err) {
+      cb(err)
       console.log('Unfortunately, something has gone wrong.', err.message);
     }); 
 };
@@ -410,7 +411,6 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
     user = userID
   }
   
-  
   getUserPlaylists(user, function(data){
     
     var items= data.items;
@@ -432,6 +432,8 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
     res.json(JSON.stringify(dataReturn));
     
   });
+  
+  
 });
 
 
