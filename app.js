@@ -112,11 +112,11 @@ app.get('/login', function(req, res){
   res.render('login', { user: req.user});
 });
 
-app.get('/create', function(req, res){
+app.get('/create', ensureAuthenticated, function(req, res){
   res.render('create.pug', { user: req.user.displayName, hasData : false, tracks : 17 });
 });
 
-app.get('/mix', function(req, res){
+app.get('/mix', ensureAuthenticated, function(req, res){
   res.render('mix.pug', { user: req.user.displayName, hasData : false, tracks : 17 });
 });
 
@@ -435,8 +435,6 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
   
   
 });
-
-
 
 
 /**
