@@ -269,11 +269,6 @@ var modalUser = new tingle.modal({
     stickyFooter: true
 }); 
 
-modalUser.addFooterBtn('Close', 'c-button tingle-btn', function(){
-    changeUserButton.classList.add("disabled");
-    modalUser.close();
-});
-
 modalUser.addFooterBtn('Change user', 'c-button tingle-btn btn-change-user disabled', function(){
     printUserPlaylists(areaMixChange, userNameValue);
     changeUserButton.classList.add("disabled");
@@ -285,6 +280,12 @@ modalUser.addFooterBtn('Select my user', 'c-button tingle-btn', function(){
     changeUserButton.classList.add("disabled");
     modalUser.close();
 }); 
+
+modalUser.addFooterBtn('Close', 'c-button tingle-btn', function(){
+    changeUserButton.classList.add("disabled");
+    modalUser.close();
+});
+
     
   
 /** Creamos el Evento para levantar el modal de cambio de usuario */
@@ -307,7 +308,6 @@ var areaMixChange;
 function changeUser(areaMix){
     
     areaMixChange = areaMix;
-    console.log(areaMixChange)
     
     modalUser.setContent(modalUserContent);
     modalUser.open();
