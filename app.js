@@ -380,7 +380,7 @@ function getUserPlaylists(userId, cb) {
   spotifyApi.clientCredentialsGrant()
     .then(function(data) {
       spotifyApi.setAccessToken(data.body['access_token']);
-      return  spotifyApi.getUserPlaylists(userId);
+      return spotifyApi.getUserPlaylists(userId);
       
     }).then(function(data) {
       cb(data.body);
@@ -392,7 +392,6 @@ function getUserPlaylists(userId, cb) {
 };
 
 
-
 /**
  * Funcion para recibir los datos desde el front y realizar las busquedas a la API
  * @function
@@ -402,8 +401,8 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
 
   var userProfile = req.user.id;
   var userID = req.param('user');
+  var userName = req.user.displayName;
   var user;
-  
   
   if (userID === 'myUser'){
     user = userProfile
@@ -411,8 +410,9 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
     user = userID
   }
   
+  
   getUserPlaylists(user, function(data){
-
+    
     var items= data.items;
     var playlists = [];
     
@@ -424,13 +424,12 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
       });
     };
       
-      // console.log(playlists);
       var dataReturn = {
-        items: playlists
+        items: playlists,
+        userName: userName
       };
 
     res.json(JSON.stringify(dataReturn));
- 
     
   });
 });

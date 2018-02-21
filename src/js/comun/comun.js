@@ -29,9 +29,11 @@ function peticionAJAX(url, cb) {
       } else {
          console.error("ERROR AJAX! en", url ,JSON.parse(xmlHttp.responseText));
       }
+      
       document.querySelector(".loader-content").style.display = 'none';
     } 
   };
+  
   xmlHttp.open("GET", url, true);
   xmlHttp.send();  
 }

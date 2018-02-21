@@ -33,8 +33,15 @@
                 flex-direction:column;
             }
             &:first-child {
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #ccc;
+                
                 @include md {
-            		padding-right:15px;
+            		padding-right: 15px;
+            		padding-bottom: 0;
+                    margin-bottom: 0;
+                    border-bottom: none;
             	}
             }
             
@@ -45,8 +52,18 @@
             }
         }
     }
-    
 }
+
+.user-chose {
+    display: flex;
+    padding-bottom: 10px;
+    align-items: center;
+    
+    .c-button {
+        margin-left: auto;
+    }
+}
+
 
 .mix-list {
     margin:15px 0;
@@ -69,7 +86,6 @@
         cursor:pointer;
         
         &:hover, &.playing {
-            
             background-color: $yellow;
             
             .mix-list__buttons .fa {
@@ -85,7 +101,7 @@
         
         .mix-list__buttons {
             .fa {
-                
+                width:12px;
                 transition:0.2s ease all;
                 opacity: 1;
                 pointer-events:none;

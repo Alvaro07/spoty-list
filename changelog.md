@@ -1,3 +1,6 @@
+#### v0.1.4
+* Add change user functionality to mix page
+
 #### v0.1.3
 * Version with mixer
 

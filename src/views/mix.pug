@@ -50,12 +50,22 @@ block content
                         h3.txt-bold.rst-margin Select two playlist to mix
                     
                     div.mix-area__content
-                        div.mix-area__combo
+                        div.mix-area__combo#AreaContentMixOne
+                            div.user-chose
+                                p User: 
+                                    span.user-name.txt-bold
+                                button( class="c-button c-button--xs" data-area="AreaContentMixOne" id="changeUserButtonOne") Change user
+                            
                             select.c-combo-box#comboMixOne
                             ul.mix-list#areaMixOne
                             
-                        div.mix-area__combo
-                            select.c-combo-box#comboMixTwo 
+                        div.mix-area__combo#AreaContentMixTwo
+                            div.user-chose
+                                p User: 
+                                    span.user-name.txt-bold
+                                button( class="c-button c-button--xs" data-area="AreaContentMixTwo" id="changeUserButtonTwo") Change user
+                            
+                            select.c-combo-box#comboMixTwo
                             ul.mix-list#areaMixTwo
                         
                 div.add-more-wrap.hide#addMoreWrap
@@ -76,6 +86,15 @@ block content
                         button(id="playlistAdd" class="c-button playlist-create__btn" title="Create playlist" disabled) CREATE 
                 
                 ul.playlist#playlistItems
+    
+        div.tingle-user-content.hide
+            h5 Search a user to be able to mix their playlists
+            div.c-input
+                input(type="text" required class="change-user-input")
+                span.bar
+                label Look for a user
+            
+            
                 
     script(src="dist/js/tingle.min.js" type="text/javascript")  
     script(src="dist/js/bundleMix.js" type="text/javascript")   

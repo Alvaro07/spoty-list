@@ -17,38 +17,37 @@ var areaMixOne = document.getElementById('areaMixOne'),
  * @function
  */
  
-function printUserPlaylists(userSearch){ 
+function printUserPlaylists(mixZone, userSearch){ 
         
         /** Si no le indicamos usuario usamos el perfil con el que nos hemos logado */
+        var userName;
         
         if ( userSearch === undefined) {
             userSearch = "myUser";    
+        } else {
+            userName = userSearch;
         }
         
         var url = '/apiPlaylists/dataPlaylists?user=' + userSearch;
         peticionAJAX(url, function(data){
-
             data = JSON.parse(data);
+            
             var dataItems = data.items;
-
+            
+            if ( userSearch === "myUser") {
+                userName = data.userName;    
+            }
+            
             if ( dataItems.length === 0){
                 
-                var modalTinyNoFooter = new tingle.modal({
-                   onOpen: function() {
-                      searchInput.blur()
-                    },
-                   beforeClose: function(){
-                       this.destroy()
-                   }
-                });
+                var modalTinyNoFooter = new tingle.modal({});
                 modalTinyNoFooter.open();
-                modalTinyNoFooter.setContent("No matches found");
+                modalTinyNoFooter.setContent("This user dont have playlists");
 
                 
             } else {
                 
                 /** Pintamos todas las opciones del combo, empezando por un 'select playlist' inicial */
-                
                 itemsList = "<option data-selector='index-option'>Select your playlist</option>";
                 
                 dataItems.forEach(function ShowResults(value, index){
@@ -57,19 +56,38 @@ function printUserPlaylists(userSearch){
                 
                 /** Rellenamos los dos combos con las posibles listas del usuario a mezclar */
                 
-                document.getElementById('comboMixOne').innerHTML = itemsList;
-                document.getElementById('comboMixTwo').innerHTML = itemsList;
+                var element = '#' + mixZone + ' .c-combo-box';
+                var userElemenet = '#' + mixZone + ' .user-name';
                 
-                /** Reseteamos itemsList  */
-                // itemsList = '';
+                document.querySelector(element).innerHTML = itemsList;
+                document.querySelector(userElemenet).innerHTML = userName;
+                
+                if (mixZone === 'AreaContentMixOne') {
+                    
+                    arrayMixOne = [];
+                    areaMixOne.innerHTML = '';
+                    listaTemasArray = [];
+                    watchEmptyMixlists();
+                    
+                } else if (mixZone === 'AreaContentMixTwo') {
+                    
+                    arrayMixTwo = [];
+                    areaMixTwo.innerHTML = '';
+                    listaTemasArray = [];
+                    watchEmptyMixlists();
+                
+                    
+                }
+                
             }
         });
+        
     
 };
 
 /** Pintamos  las paylists al iniciar la pagina  */
-
-printUserPlaylists();    
+printUserPlaylists('AreaContentMixOne');    
+printUserPlaylists('AreaContentMixTwo');    
 
 
  /**
@@ -243,4 +261,77 @@ mixPlaylistsButton.addEventListener('click', function(){
 });
 
 
+/** Creamos el modal para cambiar el usuario */
+
+var modalUser = new tingle.modal({
+    closeMethods: [],
+    footer: true,
+    stickyFooter: true
+}); 
+
+modalUser.addFooterBtn('Close', 'c-button tingle-btn', function(){
+    changeUserButton.classList.add("disabled");
+    modalUser.close();
+});
+
+modalUser.addFooterBtn('Change user', 'c-button tingle-btn btn-change-user disabled', function(){
+    printUserPlaylists(areaMixChange, userNameValue);
+    changeUserButton.classList.add("disabled");
+    modalUser.close();
+}); 
+
+modalUser.addFooterBtn('Select my user', 'c-button tingle-btn', function(){
+    printUserPlaylists(areaMixChange);  
+    changeUserButton.classList.add("disabled");
+    modalUser.close();
+}); 
     
+  
+/** Creamos el Evento para levantar el modal de cambio de usuario */
+var changeUserButtonOne = document.getElementById('changeUserButtonOne'),
+    changeUserButtonTwo = document.getElementById('changeUserButtonTwo'),
+    modalUserContent = document.querySelector('.tingle-user-content').innerHTML,
+    changeUserButton = document.querySelector('.btn-change-user'),
+    userNameValue;
+    
+    
+changeUserButtonOne.addEventListener('click', function(){
+    changeUser(this.getAttribute('data-area'));
+})
+changeUserButtonTwo.addEventListener('click', function(){
+    changeUser(this.getAttribute('data-area'));
+})
+
+
+var areaMixChange;
+function changeUser(areaMix){
+    
+    areaMixChange = areaMix;
+    console.log(areaMixChange)
+    
+    modalUser.setContent(modalUserContent);
+    modalUser.open();
+    
+    document.querySelector('.tingle-modal .change-user-input').addEventListener("keyup", function(event){
+        userNameValue = this.value;
+        
+        if (this.value != 0) {
+            changeUserButton.classList.remove("disabled");
+            if (event.which == 13 || event.keyCode == 13) {
+               printUserPlaylists(areaMixChange, userNameValue); 
+               changeUserButton.classList.add("disabled");
+               modalUser.close();
+            }
+        } else {
+            changeUserButton.classList.add("disabled");
+        }
+    });
+}
+
+
+
+
+
+
+
+
