@@ -96,7 +96,6 @@ function addItemsSearch(dataSearch){
                 /** Pintamos el objeto */
                  
                 itemsSearchResults.innerHTML = itemsList;
-                console.log(dataItems.length)
                 
                 
                 /**  Comprobamos cual es el resultado de la busqueda pra que cuando
