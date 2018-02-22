@@ -1,3 +1,5 @@
+"use strict";
+
 // Globals variables
 var itemsList,
     searchWord,

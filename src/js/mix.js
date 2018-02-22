@@ -1,3 +1,5 @@
+"use strict";
+
 var areaMixOne = document.getElementById('areaMixOne'),
     areaMixTwo = document.getElementById('areaMixTwo'),
     areaMixFinal = document.getElementById('areaMixFinal'),

@@ -1,3 +1,5 @@
+"use strict";
+
 // Globals variables
 var tracksToPlaylist = [],
     itemsToPlaylist = [], 
@@ -19,7 +21,6 @@ var playlistItems = document.getElementById("playlistItems"),
  */
 
 function addPlaylist(data, modalState){ 
-    
     
     /** seteamos la variables playlist a 0, para volver a crear la playlist 
     completa con todos los datos del objeto que le pasamos */

@@ -376,6 +376,8 @@ app.post('/playlist', function (req, res) {
  * @function
  */
 function getUserPlaylists(userId, cb) {
+  
+  
  
   spotifyApi.clientCredentialsGrant()
     .then(function(data) {
@@ -410,6 +412,7 @@ app.get('/apiPlaylists/:dataPlaylists', function (req, res) {
   } else {
     user = userID
   }
+
   
   getUserPlaylists(user, function(data){
     
@@ -468,7 +471,6 @@ app.get('/apiListsTracks/:datatracks', function (req, res) {
   var playlistId = req.param('id');
   var ownerId = req.param('user');
   
-  
   getPlaylistsTracks(ownerId, playlistId, function(data){
     
     
@@ -500,6 +502,5 @@ app.get('/apiListsTracks/:datatracks', function (req, res) {
   });  
   
 });
-
 
 

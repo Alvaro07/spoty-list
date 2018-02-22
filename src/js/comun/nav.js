@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Función para abrir y cerrar el menu principal para movil
  * @function
